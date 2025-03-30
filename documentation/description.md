@@ -19,6 +19,11 @@ See below for options.
 - GPU A40 (cheapest option)
 - Pod volume: 75Gb / 100 Gb
 
+## Template [RunPod.io](https://runpod.io?ref=se4tkc5o)
+
+- [HunyuanVideo](https://runpod.io/console/deploy?template=5avqh2xkq3&ref=se4tkc5o)
+- [Wan21](https://runpod.io/console/deploy?template=5avqh2xkq3&ref=se4tkc5o)
+
 ## Environment Variables  
 
 ### **Authentication Tokens**  
