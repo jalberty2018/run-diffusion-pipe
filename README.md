@@ -26,7 +26,7 @@ See below for options.
 ## Template [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
 - [HunyuanVideo](https://runpod.io/console/deploy?template=5avqh2xkq3&ref=se4tkc5o)
-- [Wan21](https://runpod.io/console/deploy?template=5avqh2xkq3&ref=se4tkc5o)
+- [Wan21](https://runpod.io/console/deploy?template=w97tab8ql0&ref=se4tkc5o)
 
 ## Available Images
 
