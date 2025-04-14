@@ -67,12 +67,12 @@ See below for options.
 ## Examples toml
 
 - [Hunyuanvideo](examples/hunyuanvideo_config.toml)
-- [Wan](examples/wan21_config.toml)
+- [Wan21](examples/wan21_config.toml)
 - [dataset](examples/dataset.toml)
 
 ## Usage
 
-### Start training A40 or L40
+### Start training A40 or L40S
 
 ```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml

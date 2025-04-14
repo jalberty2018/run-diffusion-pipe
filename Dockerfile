@@ -4,11 +4,11 @@ FROM ls250824/pytorch-cuda-ubuntu-develop:08122024 AS base
 # Set working directory
 WORKDIR /
 
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-
 # Copy start script
 COPY --chmod=755 start.sh /
+
+# Install code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Copy supporting files
 COPY --chmod=644 documentation/README.md /

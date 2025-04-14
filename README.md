@@ -37,7 +37,7 @@ Base Image: ls250824/pytorch-cuda-ubuntu-develop:08122024
 #### Custom Build: 
 
 ```bash
-docker pull ls250824/run-diffusion-pipe:30032025
+docker pull ls250824/run-diffusion-pipe:13042025
 ```
 
 ## Environment Variables  
@@ -94,14 +94,14 @@ docker pull ls250824/run-diffusion-pipe:30032025
 ## Examples toml
 
 - [Hunyuanvideo](examples/hunyuanvideo_config.toml)
-- [Wan](examples/wan21_config.toml)
+- [Wan21](examples/wan21_config.toml)
 - [dataset](examples/dataset.toml)
 
 ## Usage
 
 ![Start of training](images/shellfish.png)
 
-### Start training A40 or L40
+### Start training A40 or L40S
 
 ```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
