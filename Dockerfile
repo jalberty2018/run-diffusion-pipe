@@ -1,25 +1,29 @@
 # Base image
-FROM ls250824/pytorch-cuda-ubuntu-develop:08122024 AS base
+FROM ls250824/pytorch-cuda-ubuntu-develop:05072025 AS base
 
 # Set working directory
 WORKDIR /
 
 # Copy start script
-COPY --chmod=755 start.sh /
+COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/examples-on-workspace.sh onworkspace/provisioning-on-workspace.sh onworkspace/readme-on-workspace.sh   /
 
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Copy supporting files
-COPY --chmod=644 documentation/README.md /
-COPY --chmod=755 onworkspace/diffusion-pipe-on-workspace.sh /
-COPY --chmod=755 onworkspace/examples-on-workspace.sh /
-COPY --chmod=755 onworkspace/provisioning-on-workspace.sh /
-COPY --chmod=755 onworkspace/readme-on-workspace.sh /
+COPY --chmod=644 documentation/README_runpod.md /
 
 # Copy Scripts directory
 COPY --chmod=644 examples /examples
 COPY --chmod=644 provisioning /provisioning
+
+# Download the wheel for flash_attn
+RUN wget https://github.com/jalberty2018/run-pytorch-cuda-develop/releases/download/v1.0.0/flash_attn-2.7.2-cp311-cp311-linux_x86_64.whl
+
+# Install wheel
+RUN pip3 install --no-cache-dir huggingface_hub comfy-cli \
+    flash_attn-2.7.2-cp311-cp311-linux_x86_64.whl \
+    rm -f flash_attn-2.7.2-cp311-cp311-linux_x86_64.whl
 
 # Clone and install diffusion-pipe
 RUN git clone --recurse-submodules https://github.com/tdrussell/diffusion-pipe && \

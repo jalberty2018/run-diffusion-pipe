@@ -1,9 +1,9 @@
-# run-diffusion-pipe on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+# run-diffusion-pipe
 
 ## Synopsis
 
-A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **Wan21**. 
-This pod downloads models as specified in the **environment variables** set in the templates available on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **Wan21** **Omnigen2**. 
+This pod downloads models as specified in the **environment variables** set in the template
 
 - Models are automatically downloaded based on the specified paths in the environment configuration.  
 - Authentication credentials can be set via secrets for:  
@@ -13,17 +13,20 @@ This pod downloads models as specified in the **environment variables** set in t
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
 
-## Websites
+## Setup
 
-- [diffusion-pipe](https://github.com/tdrussell/diffusion-pipe)
-- [code server](https://github.com/coder/code-server)
-- [tensorboard](https://www.tensorflow.org/tensorboard)
-- [huggingface-cli](https://huggingface.co/docs/huggingface_hub/v0.27.0/guides/cli)
+| Component | Version              |
+|-----------|----------------------|
+| OS        | `Ubuntu 22.x x86_64` |
+| Python    | `3.11.x`             |
+| PyTorch   | `2.7.1`              |
+| CUDA      | `12.8`               |
 
-## Tutorial
+## Installed Attentions
 
-- [Hunyuanvideo](https://civitai.com/articles/9798/training-a-lora-for-hunyuan-video-on-windows)
-- [Wan21](https://www.stablediffusiontutorials.com/2025/03/wan-lora-train.html)
+| Package        | Version  |
+|-----------------|----------|
+| flash_attn     | 2.7.2    |
 
 ## Environment Variables  
 
@@ -59,18 +62,36 @@ See below for options.
 | **Code Server** | `9000` (HTTP) |
 | **SSH/SCP**     | `22`   (TCP)  |
 
-## Provisioning
+## Websites
+
+- [diffusion-pipe](https://github.com/tdrussell/diffusion-pipe)
+- [code server](https://github.com/coder/code-server)
+- [tensorboard](https://www.tensorflow.org/tensorboard)
+- [huggingface-cli](https://huggingface.co/docs/huggingface_hub/v0.27.0/guides/cli)
+- [Flash attention](https://github.com/Dao-AILab/flash-attention)
+
+## Tutorial
+
+- [Hunyuanvideo](https://civitai.com/articles/9798/training-a-lora-for-hunyuan-video-on-windows)
+- [Wan21](https://www.stablediffusiontutorials.com/2025/03/wan-lora-train.html)
+- [Lora training](https://civitai.com/articles/3105/essential-to-advanced-guide-to-training-a-lora)
+
+## Manuel provisioning
 
 - [hunyuanVideo](provisioning/hunyuanvideo.md)
 - [Wan21](provisioning/wan21.md)
+- [Omnigen2](provisioning/omnigen2.md)
+
+## Supported models
+
+- [doc](https://github.com/tdrussell/diffusion-pipe/blob/main/docs/supported_models.md)
 
 ## Examples toml
 
 - [Hunyuanvideo](examples/hunyuanvideo_config.toml)
 - [Wan21](examples/wan21_config.toml)
+- [Omnigen2](examples/omnigen2_config.toml)
 - [dataset](examples/dataset.toml)
-
-## Usage
 
 ### Start training A40 or L40S
 
@@ -126,6 +147,3 @@ htop
 tmux
 tmux attach
 ```
-
-
-

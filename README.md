@@ -1,8 +1,10 @@
+[![Docker Image Version](https://img.shields.io/docker/v/ls250824/run-diffusion-pipe)](https://hub.docker.com/r/ls250824/run-diffusion-pipe)
+
 # run-diffusion-pipe on [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
 ## Synopsis
 
-A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **Wan21**. 
+A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **Wan21** **Omnigen2**. 
 This pod downloads models as specified in the **environment variables** set in the templates available on [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
 - Models are automatically downloaded based on the specified paths in the environment configuration.  
@@ -28,16 +30,35 @@ See below for options.
 - [HunyuanVideo](https://runpod.io/console/deploy?template=5avqh2xkq3&ref=se4tkc5o)
 - [Wan21](https://runpod.io/console/deploy?template=w97tab8ql0&ref=se4tkc5o)
 
+## Setup
+
+| Component | Version              |
+|-----------|----------------------|
+| OS        | `Ubuntu 22.x x86_64` |
+| Python    | `3.11.x`             |
+| PyTorch   | `2.7.1`              |
+| CUDA      | `12.8`               |
+
+## Installed Attentions
+
+| Package        | Version  |
+|-----------------|----------|
+| flash_attn     | 2.7.2    |
+
 ## Available Images
 
 ### Image
 
-Base Image: ls250824/pytorch-cuda-ubuntu-develop:08122024
+```txt
+Base Image: ls250824/pytorch-cuda-ubuntu-develop:<version>
+```
+
+[![Docker Image Version](https://img.shields.io/docker/v/ls250824/pytorch-cuda-ubuntu-develop)](https://hub.docker.com/r/ls250824/pytorch-cuda-ubuntu-develop)
 
 #### Custom Build: 
 
 ```bash
-docker pull ls250824/run-diffusion-pipe:13042025
+docker pull ls250824/run-diffusion-pipe:<version>
 ```
 
 ## Environment Variables  
@@ -80,21 +101,29 @@ docker pull ls250824/run-diffusion-pipe:13042025
 - [code server](https://github.com/coder/code-server)
 - [tensorboard](https://www.tensorflow.org/tensorboard)
 - [huggingface-cli](https://huggingface.co/docs/huggingface_hub/v0.27.0/guides/cli)
+- [Flash attention](https://github.com/Dao-AILab/flash-attention)
 
 ## Tutorial
 
 - [Hunyuanvideo](https://civitai.com/articles/9798/training-a-lora-for-hunyuan-video-on-windows)
 - [Wan21](https://www.stablediffusiontutorials.com/2025/03/wan-lora-train.html)
+- [Lora training](https://civitai.com/articles/3105/essential-to-advanced-guide-to-training-a-lora)
 
-## Provisioning
+## Manuel provisioning
 
 - [hunyuanVideo](provisioning/hunyuanvideo.md)
 - [Wan21](provisioning/wan21.md)
+- [Omnigen2](provisioning/omnigen2.md)
+
+## Supported models
+
+- [doc](https://github.com/tdrussell/diffusion-pipe/blob/main/docs/supported_models.md)
 
 ## Examples toml
 
 - [Hunyuanvideo](examples/hunyuanvideo_config.toml)
 - [Wan21](examples/wan21_config.toml)
+- [Omnigen2](examples/omnigen2_config.toml)
 - [dataset](examples/dataset.toml)
 
 ## Usage
@@ -119,43 +148,6 @@ deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --resume_f
 NCCL_P2P_DISABLE="1" NCCL_IB_DISABLE="1" deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 
-## 7z
-
-### Add directory to encrypted archive
-
-```bash
-7z a -p -mhe=on output-training.7z /workspace/output/
-```
-
-### Extract directory from archive
-
-```bash
-7z x x.7z
-```
-
-## Split-Join
-
-### Split
-
-```bash
-split -n 3 x.7z x_part
-```
-
-### Join files
-
-```bash
-cat x_part* > x.7z
-```
-
-## Bash commands
-
-```bash
-nvtop
-htop
-tmux
-tmux attach
-```
-
 ## Building the Docker Image 
 
 This is not possible on [runpod.io](https://runpod.io?ref=se4tkc5o) use local hardware.
@@ -175,8 +167,9 @@ Run the following command to clone the repository and build the image:
 
 ```bash
 git clone https://github.com/jalberty2018/run-diffusion-pipe.git
+mv ./run-diffusion-pipe/build_docker.py ..
 
-python3 run-diffusion-pipe/build-docker.py \
+python3 build-docker.py \
 --username=<your_dockerhub_username> \
 --tag=<custom_tag> \ 
 run-diffusion-pipe
