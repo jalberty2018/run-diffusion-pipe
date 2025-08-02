@@ -21,8 +21,8 @@ COPY --chmod=644 provisioning /provisioning
 RUN wget https://github.com/jalberty2018/run-pytorch-cuda-develop/releases/download/v1.0.0/flash_attn-2.7.2-cp311-cp311-linux_x86_64.whl
 
 # Install wheel
-RUN pip3 install --no-cache-dir -U "huggingface_hub[cli]" \
-    flash_attn-2.7.2-cp311-cp311-linux_x86_64.whl \
+RUN pip3 install --no-cache-dir \
+    flash_attn-2.7.2-cp311-cp311-linux_x86_64.whl && \
     rm -f flash_attn-2.7.2-cp311-cp311-linux_x86_64.whl
 
 # Clone and install diffusion-pipe
