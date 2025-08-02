@@ -4,7 +4,7 @@
 
 ## Synopsis
 
-A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **Wan21** **Omnigen2**. 
+A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**. 
 This pod downloads models as specified in the **environment variables** set in the templates available on [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
 - Models are automatically downloaded based on the specified paths in the environment configuration.  
@@ -75,11 +75,11 @@ docker pull ls250824/run-diffusion-pipe:<version>
 | LLM               | `HF_MODEL_LLM`          |                                    |
 | CLIP              | `HF_MODEL_CLIP`         |                                    |
 
-### **Diffusion Models Setup Wan21 Omnigen2**  
+### **Diffusion Models Setup WAN / Phantom**  
 
-| Model Type        | Model                   | Safetensors                        |
-|-------------------|-------------------------|------------------------------------| 
-| Checkpoint        | `HF_MODEL_CKPT`         |                                    |
+| Model Type        | Model                   |
+|-------------------|-------------------------| 
+| Checkpoint        | `HF_MODEL_CKPT`         |
 
 ## Connection options 
 
@@ -102,7 +102,7 @@ docker pull ls250824/run-diffusion-pipe:<version>
 ## Tutorial
 
 - [Hunyuanvideo](https://civitai.com/articles/9798/training-a-lora-for-hunyuan-video-on-windows)
-- [Wan21](https://www.stablediffusiontutorials.com/2025/03/wan-lora-train.html)
+- [Wan](https://www.stablediffusiontutorials.com/2025/03/wan-lora-train.html)
 - [Lora training](https://civitai.com/articles/3105/essential-to-advanced-guide-to-training-a-lora)
 
 ## Supported models

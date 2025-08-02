@@ -1,13 +1,13 @@
 # Provisioning
 
-## https://huggingface.co/Wan-AI/Wan2.1-T2V-14B
+## [Wan2.1-T2V-14B](https://huggingface.co/Wan-AI/Wan2.1-T2V-14B)
 
 ```bash
-huggingface-cli download Wan-AI/Wan2.1-T2V-14B --local-dir /workspace/models/ckpt_path/
+hf download Wan-AI/Wan2.1-T2V-14B --local-dir /workspace/models/ckpt_path/
 ```
 
-## https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B
+## [Wan2.1-T2V-1.3B](https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B)
 
 ```bash
-huggingface-cli download Wan-AI/Wan2.1-T2V-1.3B --local-dir /workspace/models/ckpt_path/
+hf download Wan-AI/Wan2.1-T2V-1.3B --local-dir /workspace/models/ckpt_path/
 ```
