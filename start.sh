@@ -17,7 +17,7 @@ for script in diffusion-pipe-on-workspace.sh readme-on-workspace.sh examples-on-
         echo "Executing $script..."
         "/$script"
     else
-        echo "Skipping $script (not found)"
+        echo "⚠️ Skipping $script (not found)"
     fi
 done
 
@@ -28,7 +28,7 @@ if [[ ${RUNPOD_GPU_COUNT:-0} -gt 0 ]]; then
         code-server /workspace --auth password --disable-telemetry --host 0.0.0.0 --bind-addr 0.0.0.0:9000 &
 		sleep 1
     else
-        echo "[WARNING]: PASSWORD is not set as an environment variable"
+        echo "⚠️ WARNING: PASSWORD is not set as an environment variable"
         code-server /workspace --disable-telemetry --host 0.0.0.0 --bind-addr 0.0.0.0:9000 &
     fi
 	
@@ -37,15 +37,15 @@ if [[ ${RUNPOD_GPU_COUNT:-0} -gt 0 ]]; then
 	sleep 1
 	
 else
-    echo "[WARNING]: No GPU available, servers not started to limit memory use"
+    echo "⚠️ WARNING: No GPU available, servers not started to limit memory use"
 fi
 	
 # Login to Hugging Face if token is provided
 if [[ -n "$HF_TOKEN" ]]; then
-    hf login --token "$HF_TOKEN"
+    hf auth login --token "$HF_TOKEN"
 	sleep 1
 else
-	echo "[WARNING]: HF_TOKEN is not set as an environment variable"
+	echo "⚠️ WARNING: HF_TOKEN is not set as an environment variable"
 fi
 
 # Function to download models if variables are set
@@ -58,7 +58,7 @@ download_model_HF2() {
         hf download "${!model_var}" "${!file_var}" --local-dir "/workspace/models/$dest_dir/"
 		sleep 1
     else
-        echo "[WARNING]: No model or file specified for $dest_dir, skipping."
+        echo "⚠️ WARNING: No model or file specified for $dest_dir, skipping."
     fi
 }
 
@@ -70,7 +70,7 @@ download_model_HF1() {
         hf download "${!model_var}" --local-dir "/workspace/models/$dest_dir/"
 		sleep 1
     else
-        echo "[WARNING]: No model specified for $dest_dir, skipping."
+        echo "⚠️ WARNING: No model specified for $dest_dir, skipping."
     fi
 }
 
@@ -93,7 +93,7 @@ download_model_HF1 HF_MODEL_CLIP "clip"
 download_model_HF1 HF_MODEL_CKPT "ckpt_path"
 
 # Final message
-echo "[INFO] Provisioning done"
+echo "✅  Provisioning done"
 
 # Keep the container running
 exec sleep infinity

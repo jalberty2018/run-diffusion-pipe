@@ -1,5 +1,7 @@
 # Provisioning
 
+- [Documentation](https://github.com/tdrussell/diffusion-pipe/blob/main/docs/supported_models.md)
+
 ## [Wan2.2-T2V-14B](https://huggingface.co/Wan-AI/Wan2.2-T2V-A14B)
 
 ```bash

@@ -22,12 +22,6 @@ See below for options.
 | PyTorch   | `2.7.1`              |
 | CUDA      | `12.8`               |
 
-## Installed Attentions
-
-| Package        | Version  |
-|-----------------|----------|
-| flash_attn     | 2.7.2    |
-
 ## Environment Variables  
 
 ### **Authentication Tokens**  
@@ -67,7 +61,7 @@ See below for options.
 - [diffusion-pipe](https://github.com/tdrussell/diffusion-pipe)
 - [code server](https://github.com/coder/code-server)
 - [tensorboard](https://www.tensorflow.org/tensorboard)
-- [huggingface-cli](https://huggingface.co/docs/huggingface_hub/v0.27.0/guides/cli)
+- [huggingface hub](https://huggingface.co/docs/huggingface_hub/index)
 - [Flash attention](https://github.com/Dao-AILab/flash-attention)
 
 ## Tutorial
@@ -101,10 +95,20 @@ See below for options.
 
 - [dataset](examples/dataset.toml)
 
-### Start training A40 or L40S
+### Start training RTX A5000, A40, L40S
+
+#### WAN 2.1 and others
 
 ```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
+```
+
+#### WAN 2.2
+
+```bash 
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_low.toml
+
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_high.toml
 ```
 
 ### Resume training (--resume_from_checkpoint)
@@ -152,6 +156,7 @@ cat x_part* > x.7z
 ```bash
 nvtop
 htop
+ncdu
 tmux
 tmux attach
 ```

@@ -1,5 +1,7 @@
 # Provisioning
 
+- [Documentation](https://github.com/tdrussell/diffusion-pipe/blob/main/docs/supported_models.md)
+
 ## https://huggingface.co/OmniGen2/OmniGen2
 
 ```bash

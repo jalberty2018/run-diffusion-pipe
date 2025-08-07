@@ -1,5 +1,7 @@
 # Provisioning
 
+- [Documentation](https://github.com/tdrussell/diffusion-pipe/blob/main/docs/supported_models.md)
+
 ## [Phantom-14B](https://huggingface.co/bytedance-research/Phantom/tree/main)
 
 ```bash

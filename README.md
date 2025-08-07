@@ -15,15 +15,20 @@ This pod downloads models as specified in the **environment variables** set in t
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
 
+## Training WAN 2.2 image lora on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+
+![High Low noise training](images/runpod.jpg)
+
 ## Tensorboard on [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
-![End of training](images/tensorboard.jpg)
+![Tensorboard high noise model](images/tensorboard-high1.jpg)
+![Tensorboard low noise model](images/tensorboard-low1.jpg)
 
 ## Hardware provisioning
 
 - [Runpod.io](https://runpod.io/)
-- GPU A40 (cheapest option)
-- Pod volume: 75Gb / 100 Gb
+- GPU RTX A5000 , A40
+- Pod volume: 80Gb / 100 Gb (depending on your dataset and model size)
 
 ## Template [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
@@ -38,12 +43,6 @@ See below for options.
 | Python    | `3.11.x`             |
 | PyTorch   | `2.7.1`              |
 | CUDA      | `12.8`               |
-
-## Installed Attentions
-
-| Package        | Version  |
-|-----------------|----------|
-| flash_attn     | 2.7.2    |
 
 ## Available Images
 
@@ -100,7 +99,7 @@ docker pull ls250824/run-diffusion-pipe:<version>
 - [diffusion-pipe](https://github.com/tdrussell/diffusion-pipe)
 - [code server](https://github.com/coder/code-server)
 - [tensorboard](https://www.tensorflow.org/tensorboard)
-- [huggingface-cli](https://huggingface.co/docs/huggingface_hub/v0.27.0/guides/cli)
+- [huggingface hub](https://huggingface.co/docs/huggingface_hub/index)
 - [Flash attention](https://github.com/Dao-AILab/flash-attention)
 
 ## Tutorial
@@ -134,26 +133,26 @@ docker pull ls250824/run-diffusion-pipe:<version>
 
 - [dataset](examples/dataset.toml)
 
-## Usage
+## Start training RTX A5000, A40, L40S
 
-![Start of training](images/shellfish.png)
-
-### Start training A40 or L40S
+### WAN 2.1 and others
 
 ```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
+```
+
+### WAN 2.2
+
+```bash 
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_low.toml
+
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_high.toml
 ```
 
 ### Resume training (--resume_from_checkpoint)
 
 ```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --resume_from_checkpoint --config /workspace/x/config.toml
-```
-
-### Start training RTX 4000
-
-```bash
-NCCL_P2P_DISABLE="1" NCCL_IB_DISABLE="1" deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 
 ## Building the Docker Image 
