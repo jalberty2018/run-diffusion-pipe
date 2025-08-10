@@ -73,7 +73,8 @@ docker pull ls250824/run-diffusion-pipe:<version>
 
 | Model Type        | Model                   |
 |-------------------|-------------------------| 
-| Checkpoint        | `HF_MODEL_CKPT`         |     
+| Checkpoint        | `HF_MODEL_CKPT`         |
+| Diffusers         | `HF_MODEL_DIFFUSERS`    | 
 
 
 ### **Diffusion Models Setup Hunyuanvideo**  
@@ -122,19 +123,19 @@ docker pull ls250824/run-diffusion-pipe:<version>
 
 - [doc](https://github.com/tdrussell/diffusion-pipe/blob/main/docs/supported_models.md)
 
-## Example configs
+## Example config_examples
 
-- [Hunyuanvideo](configs/hunyuanvideo_config.toml)
-- [Wan21](configs/wan21_config.toml)
-- [Wan22](configs/wan22_config.toml)
-- [Wan22 low noise](configs/wan22_low_noise_config.toml)
-- [Wan22 high noise](configs/wan22_high_noise_config.toml)
-- [Omnigen2](configs/omnigen2_config.toml)
-- [Qwen-image](configs/qwen-image_config.toml)
+- [Hunyuanvideo](config_examples/hunyuanvideo_config.toml)
+- [Wan21](config_examples/wan21_config.toml)
+- [Wan22](config_examples/wan22_config.toml)
+- [Wan22 low noise](config_examples/wan22_low_noise_config.toml)
+- [Wan22 high noise](config_examples/wan22_high_noise_config.toml)
+- [Omnigen2](config_examples/omnigen2_config.toml)
+- [Qwen-image](config_examples/qwen-image_config.toml)
 
 ## Example dataset
 
-- [dataset](configs/dataset.toml)
+- [dataset](config_examples/dataset.toml)
 
 ## Start training RTX A5000, A40, L40S
 

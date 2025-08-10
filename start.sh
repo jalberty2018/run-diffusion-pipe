@@ -12,7 +12,7 @@ if [[ -n "$PUBLIC_KEY" ]]; then
 fi
 
 # Move necessary files to workspace
-for script in diffusion-pipe-on-workspace.sh readme-on-workspace.sh configs-on-workspace.sh provisioning-on-workspace.sh; do
+for script in diffusion-pipe-on-workspace.sh readme-on-workspace.sh config_examples-on-workspace.sh provisioning-on-workspace.sh; do
     if [ -f "/$script" ]; then
         echo "Executing $script..."
         "/$script"
@@ -90,6 +90,7 @@ mkdir -p /workspace/models/vae \
          /workspace/models/clip \
          /workspace/models/transformer \
 		 /workspace/models/ckpt_path \
+		 /workspace/models/diffusers_path \	 
          /workspace/output
 
 # Provisioning Models
@@ -101,6 +102,7 @@ download_model_HF2 HF_MODEL_TRANSFORMER HF_MODEL_TRANSFORMER_SAFETENSORS "transf
 download_model_HF1 HF_MODEL_LLM "llm"
 download_model_HF1 HF_MODEL_CLIP "clip"
 download_model_HF1 HF_MODEL_CKPT "ckpt_path"
+download_model_HF1 HF_MODEL_DIFFUSERS "diffusers_path"
 
 # Final message
 echo "✅ Provisioning done"

@@ -65,7 +65,8 @@ docker pull ls250824/run-diffusion-pipe:<version>
 
 | Model Type        | Model                   |
 |-------------------|-------------------------| 
-| Checkpoint        | `HF_MODEL_CKPT`         |     
+| Checkpoint        | `HF_MODEL_CKPT`         |
+| Diffusers         | `HF_MODEL_DIFFUSERS`    | 
 
 
 ### **Diffusion Models Setup Hunyuanvideo**  

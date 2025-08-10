@@ -80,7 +80,7 @@ video_clip_mode = 'single_beginning'
 
 [model]
 type = 'qwen_image'
-diffusers_path = '/workspace/models/ckpt_path/'
+diffusers_path = '/workspace/models/diffusers_path/'
 dtype = 'bfloat16'
 transformer_dtype = 'float8'
 timestep_sample_method = 'logit_normal'

@@ -8,7 +8,7 @@ WORKDIR /
 COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/configs-on-workspace.sh onworkspace/provisioning-on-workspace.sh onworkspace/readme-on-workspace.sh /
 
 # Copy supporting files
-COPY --chmod=644 documentation/README_runpod.md /
+COPY --chmod=664 /documentation/README_runpod.md /README.md
 
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh

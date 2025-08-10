@@ -79,7 +79,7 @@ video_clip_mode = 'single_beginning'
 
 [model]
 type = 'omnigen2'
-diffusers_path = '/workspace/models/ckpt_path/'
+diffusers_path = '/workspace/models/diffusers_path/'
 dtype = 'bfloat16'
 #flux_shift = true
 
