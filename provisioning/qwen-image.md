@@ -5,6 +5,6 @@
 ## [Qwen-image](https://huggingface.co/Qwen/Qwen-Image)
 
 ```bash
-hf download Qwen/Qwen-Image --local-dir /workspace/models/ckpt_path/
+hf download Qwen/Qwen-Image --local-dir /workspace/models/diffusers_path/
 ```
 

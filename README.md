@@ -4,8 +4,8 @@
 
 ## Synopsis
 
-A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**. 
-This pod downloads models as specified in the **environment variables** set in the templates available on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**, **Qwen-image**. 
+This pod downloads models as specified in the **environment variables** set in the template
 
 - Models are automatically downloaded based on the specified paths in the environment configuration.  
 - Authentication credentials can be set via secrets for:  
@@ -69,13 +69,18 @@ docker pull ls250824/run-diffusion-pipe:<version>
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
 
-### **Diffusion Models Setup WAN and others**  
+### **Diffusion Models Setup WAN2.1 and WAN2.2 **  
 
 | Model Type        | Model                   |
 |-------------------|-------------------------| 
 | Checkpoint        | `HF_MODEL_CKPT`         |
-| Diffusers         | `HF_MODEL_DIFFUSERS`    | 
 
+
+### **Diffusion Models Setup Qwen-image, Omnigen2 **  
+
+| Model Type        | Model                   |
+|-------------------|-------------------------| 
+| Diffusers         | `HF_MODEL_DIFFUSERS`    | 
 
 ### **Diffusion Models Setup Hunyuanvideo**  
 
@@ -132,6 +137,7 @@ docker pull ls250824/run-diffusion-pipe:<version>
 - [Wan22 high noise](config_examples/wan22_high_noise_config.toml)
 - [Omnigen2](config_examples/omnigen2_config.toml)
 - [Qwen-image](config_examples/qwen-image_config.toml)
+- [Qwen-image-24gb](config_examples/qwen-image_24gb_config.toml)
 
 ## Example dataset
 
@@ -142,6 +148,7 @@ docker pull ls250824/run-diffusion-pipe:<version>
 ### WAN 2.1 and others
 
 ```bash
+cd diffusion-pipe
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 
@@ -150,6 +157,7 @@ deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /
 ```bash
 pip uninstall diffusers
 pip install git+https://github.com/huggingface/diffusers
+cd diffusion-pipe
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 

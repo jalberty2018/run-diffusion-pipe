@@ -4,8 +4,9 @@
 
 ## Synopsis
 
-A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**. 
-This pod downloads models as specified in the **environment variables** set in the templates available on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**, **Qwen-image**. 
+This pod downloads models as specified in the **environment variables** set in the template
+
 
 - Models are automatically downloaded based on the specified paths in the environment configuration.  
 - Authentication credentials can be set via secrets for:  
@@ -61,11 +62,17 @@ docker pull ls250824/run-diffusion-pipe:<version>
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
 
-### **Diffusion Models Setup WAN and others**  
+### **Diffusion Models Setup WAN2.1 and WAN2.2 **  
 
 | Model Type        | Model                   |
 |-------------------|-------------------------| 
 | Checkpoint        | `HF_MODEL_CKPT`         |
+
+
+### **Diffusion Models Setup Qwen-image, Omnigen2 **  
+
+| Model Type        | Model                   |
+|-------------------|-------------------------| 
 | Diffusers         | `HF_MODEL_DIFFUSERS`    | 
 
 

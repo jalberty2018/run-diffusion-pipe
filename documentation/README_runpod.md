@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**. 
+A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**, **Qwen-image**. 
 This pod downloads models as specified in the **environment variables** set in the template
 
 - Models are automatically downloaded based on the specified paths in the environment configuration.  
@@ -31,11 +31,17 @@ See below for options.
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
 
-### **Diffusion Models Setup WAN and others**  
+### **Diffusion Models Setup WAN2.1 and WAN2.2 **  
 
 | Model Type        | Model                   |
 |-------------------|-------------------------| 
 | Checkpoint        | `HF_MODEL_CKPT`         |
+
+
+### **Diffusion Models Setup Qwen-image, Omnigen2 **  
+
+| Model Type        | Model                   |
+|-------------------|-------------------------| 
 | Diffusers         | `HF_MODEL_DIFFUSERS`    | 
 
 
@@ -94,6 +100,7 @@ See below for options.
 - [Wan22 high noise](config_examples/wan22_high_noise_config.toml)
 - [Omnigen2](config_examples/omnigen2_config.toml)
 - [Qwen-image](config_examples/qwen-image_config.toml)
+- [Qwen-image-24gb](config_examples/qwen-image_24gb_config.toml)
 
 ## Example dataset
 
@@ -107,20 +114,20 @@ See below for options.
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 
-### Qwen Image 
-
-```bash
-pip uninstall diffusers
-pip install git+https://github.com/huggingface/diffusers
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
-```
-
 #### WAN 2.2
 
 ```bash 
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_low.toml
 
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_high.toml
+```
+
+### Qwen Image 
+
+```bash
+pip uninstall diffusers
+pip install git+https://github.com/huggingface/diffusers
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 
 ### Resume training (--resume_from_checkpoint)

@@ -58,10 +58,10 @@ frame_buckets = [1, 33]
 
 # dataset name: "Hello"
 [[directory]]
-path = '/workspace/lora/datasets/Hello'
+path = '/workspace/dataset/Hello'
 num_repeats = 1
 
-# dataset name: "Lisa"
+# dataset name: "AI"
 # [[directory]]
 # path = 
 # num_repeats =
