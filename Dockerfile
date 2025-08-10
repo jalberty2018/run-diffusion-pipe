@@ -5,7 +5,7 @@ FROM ls250824/pytorch-cuda-ubuntu-develop:21072025 AS base
 WORKDIR /
 
 # Copy start script
-COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/configs-on-workspace.sh onworkspace/provisioning-on-workspace.sh onworkspace/readme-on-workspace.sh /
+COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/config_examples-on-workspace.sh onworkspace/provisioning-on-workspace.sh onworkspace/readme-on-workspace.sh /
 
 # Copy supporting files
 COPY --chmod=664 /documentation/README_runpod.md /README.md
@@ -13,8 +13,8 @@ COPY --chmod=664 /documentation/README_runpod.md /README.md
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# Copy configs
-COPY --chmod=644 configs/ /configs
+# Copy config_examples
+COPY --chmod=644 config_examples/ /config_examples
 
 # Copy provisioning with appropriate permissions
 COPY --chmod=644 provisioning/ /provisioning
