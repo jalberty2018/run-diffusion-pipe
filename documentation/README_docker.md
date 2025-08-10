@@ -61,6 +61,13 @@ docker pull ls250824/run-diffusion-pipe:<version>
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
 
+### **Diffusion Models Setup WAN and others**  
+
+| Model Type        | Model                   |
+|-------------------|-------------------------| 
+| Checkpoint        | `HF_MODEL_CKPT`         |     
+
+
 ### **Diffusion Models Setup Hunyuanvideo**  
 
 | Model Type        | Model                   | Safetensors                        |
@@ -69,12 +76,6 @@ docker pull ls250824/run-diffusion-pipe:<version>
 | VAE               | `HF_MODEL_VAE`          | `HF_MODEL_VAE_SAFETENSORS`         |
 | LLM               | `HF_MODEL_LLM`          |                                    |
 | CLIP              | `HF_MODEL_CLIP`         |                                    |
-
-### **Diffusion Models Setup WAN / Phantom**  
-
-| Model Type        | Model                   |
-|-------------------|-------------------------| 
-| Checkpoint        | `HF_MODEL_CKPT`         |
 
 ## Connection options 
 
@@ -109,6 +110,14 @@ docker pull ls250824/run-diffusion-pipe:<version>
 #### WAN 2.1 and others
 
 ```bash
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
+```
+
+### Qwen Image 
+
+```bash
+pip uninstall diffusers
+pip install git+https://github.com/huggingface/diffusers
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 

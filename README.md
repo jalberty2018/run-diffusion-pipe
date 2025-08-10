@@ -69,6 +69,13 @@ docker pull ls250824/run-diffusion-pipe:<version>
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
 
+### **Diffusion Models Setup WAN and others**  
+
+| Model Type        | Model                   |
+|-------------------|-------------------------| 
+| Checkpoint        | `HF_MODEL_CKPT`         |     
+
+
 ### **Diffusion Models Setup Hunyuanvideo**  
 
 | Model Type        | Model                   | Safetensors                        |
@@ -77,13 +84,7 @@ docker pull ls250824/run-diffusion-pipe:<version>
 | VAE               | `HF_MODEL_VAE`          | `HF_MODEL_VAE_SAFETENSORS`         |
 | LLM               | `HF_MODEL_LLM`          |                                    |
 | CLIP              | `HF_MODEL_CLIP`         |                                    |
-
-### **Diffusion Models Setup WAN / Phantom**  
-
-| Model Type        | Model                   |
-|-------------------|-------------------------| 
-| Checkpoint        | `HF_MODEL_CKPT`         |                                    
-
+                                 
 ## Connection options 
 
 ### Services
@@ -115,6 +116,7 @@ docker pull ls250824/run-diffusion-pipe:<version>
 - [Wan 2.2](provisioning/wan22.md)
 - [Omnigen2](provisioning/omnigen2.md)
 - [Phantom](provisioning/phantom.md)
+- [Qwen-image](provisioning/qwen-image.md)
 
 ## Supported models and information
 
@@ -122,22 +124,31 @@ docker pull ls250824/run-diffusion-pipe:<version>
 
 ## Example configs
 
-- [Hunyuanvideo](examples/hunyuanvideo_config.toml)
-- [Wan21](examples/wan21_config.toml)
-- [Wan22](examples/wan22_config.toml)
-- [Wan22 low noise](examples/wan22_low_noise_config.toml)
-- [Wan22 high noise](examples/wan22_high_noise_config.toml)
-- [Omnigen2](examples/omnigen2_config.toml)
+- [Hunyuanvideo](configs/hunyuanvideo_config.toml)
+- [Wan21](configs/wan21_config.toml)
+- [Wan22](configs/wan22_config.toml)
+- [Wan22 low noise](configs/wan22_low_noise_config.toml)
+- [Wan22 high noise](configs/wan22_high_noise_config.toml)
+- [Omnigen2](configs/omnigen2_config.toml)
+- [Qwen-image](configs/qwen-image_config.toml)
 
 ## Example dataset
 
-- [dataset](examples/dataset.toml)
+- [dataset](configs/dataset.toml)
 
 ## Start training RTX A5000, A40, L40S
 
 ### WAN 2.1 and others
 
 ```bash
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
+```
+
+### Qwen Image 
+
+```bash
+pip uninstall diffusers
+pip install git+https://github.com/huggingface/diffusers
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 

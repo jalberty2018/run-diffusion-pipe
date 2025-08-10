@@ -12,7 +12,7 @@ if [[ -n "$PUBLIC_KEY" ]]; then
 fi
 
 # Move necessary files to workspace
-for script in diffusion-pipe-on-workspace.sh readme-on-workspace.sh examples-on-workspace.sh provisioning-on-workspace.sh; do
+for script in diffusion-pipe-on-workspace.sh readme-on-workspace.sh configs-on-workspace.sh provisioning-on-workspace.sh; do
     if [ -f "/$script" ]; then
         echo "Executing $script..."
         "/$script"
@@ -21,8 +21,18 @@ for script in diffusion-pipe-on-workspace.sh readme-on-workspace.sh examples-on-
     fi
 done
 
-# Start Servers
-if [[ ${RUNPOD_GPU_COUNT:-0} -gt 0 ]]; then
+# GPU detection
+HAS_GPU=0
+if [[ -n "${RUNPOD_GPU_COUNT:-}" && "${RUNPOD_GPU_COUNT:-0}" -gt 0 ]]; then
+  HAS_GPU=1
+elif command -v nvidia-smi >/dev/null 2>&1; then
+  nvidia-smi >/dev/null 2>&1 && HAS_GPU=1 || true
+elif [[ -n "${CUDA_VISIBLE_DEVICES:-}" && "${CUDA_VISIBLE_DEVICES}" != "-1" ]]; then
+  HAS_GPU=1
+fi
+
+# Run services
+if [[ "$HAS_GPU" -eq 1 ]]; then
     # Start code-server (HTTP port 9000)
     if [[ -n "$PASSWORD" ]]; then
         code-server /workspace --auth password --disable-telemetry --host 0.0.0.0 --bind-addr 0.0.0.0:9000 &
@@ -93,7 +103,7 @@ download_model_HF1 HF_MODEL_CLIP "clip"
 download_model_HF1 HF_MODEL_CKPT "ckpt_path"
 
 # Final message
-echo "✅  Provisioning done"
+echo "✅ Provisioning done"
 
 # Keep the container running
 exec sleep infinity
