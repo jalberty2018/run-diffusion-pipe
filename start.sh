@@ -35,11 +35,11 @@ fi
 if [[ "$HAS_GPU" -eq 1 ]]; then
     # Start code-server (HTTP port 9000)
     if [[ -n "$PASSWORD" ]]; then
-        code-server /workspace --auth password --disable-telemetry --host 0.0.0.0 --bind-addr 0.0.0.0:9000 &
+        code-server /workspace --auth password --disable-telemetry --disable-update-check --host 0.0.0.0 --bind-addr 0.0.0.0:9000 &
 		sleep 1
     else
-        echo "⚠️ WARNING: PASSWORD is not set as an environment variable"
-        code-server /workspace --disable-telemetry --host 0.0.0.0 --bind-addr 0.0.0.0:9000 &
+        echo "⚠️ WARNING: PASSWORD is not set as an environment variable use password in log"
+        code-server /workspace --disable-telemetry --disable-update-check --host 0.0.0.0 --bind-addr 0.0.0.0:9000 &
     fi
 	
 	# Start TensorBoard on port 6006
@@ -50,14 +50,6 @@ else
     echo "⚠️ WARNING: No GPU available, servers not started to limit memory use"
 fi
 	
-# Login to Hugging Face if token is provided
-if [[ -n "$HF_TOKEN" ]]; then
-    hf auth login --token "$HF_TOKEN"
-	sleep 1
-else
-	echo "⚠️ WARNING: HF_TOKEN is not set as an environment variable"
-fi
-
 # Function to download models if variables are set
 download_model_HF2() {
     local model_var="$1"
@@ -67,8 +59,6 @@ download_model_HF2() {
     if [[ -n "${!model_var}" && -n "${!file_var}" ]]; then
         hf download "${!model_var}" "${!file_var}" --local-dir "/workspace/models/$dest_dir/"
 		sleep 1
-    else
-        echo "⚠️ WARNING: No model or file specified for $dest_dir, skipping."
     fi
 }
 
@@ -79,8 +69,6 @@ download_model_HF1() {
     if [[ -n "${!model_var}" ]]; then
         hf download "${!model_var}" --local-dir "/workspace/models/$dest_dir/"
 		sleep 1
-    else
-        echo "⚠️ WARNING: No model specified for $dest_dir, skipping."
     fi
 }
 
@@ -105,7 +93,20 @@ download_model_HF1 HF_MODEL_CKPT "ckpt_path"
 download_model_HF1 HF_MODEL_DIFFUSERS "diffusers_path"
 
 # Final message
-echo "✅ Provisioning done"
+echo "✅ Ready"
+
+python - <<'PY'
+import torch, platform, triton, os
+print(f"Python: {platform.python_version()}")
+print(f"PyTorch: {torch.__version__}")
+print(f"Triton version: {triton.__version__}")
+print(f"CUDA available: {torch.cuda.is_available()}")
+if torch.cuda.is_available():
+    print(f"  ↳ CUDA runtime: {torch.version.cuda}")
+    print(f"  ↳ GPU(s): {[torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())]}")
+    print(f"  ↳ cuDNN: {torch.backends.cudnn.version()}")
+    print(f"Torch build info: {torch.__config__.show()}")
+PY
 
 # Keep the container running
 exec sleep infinity

@@ -27,34 +27,52 @@ See below for options.
 ## Hardware provisioning
 
 - [Runpod.io](https://runpod.io/)
-- GPU RTX A5000 , A40
+- GPU RTX A5000 , A40, L40S
 - Pod volume: 80Gb / 100 Gb (depending on your dataset and model size)
 
 ## Template [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
-- [HunyuanVideo](https://runpod.io/console/deploy?template=5avqh2xkq3&ref=se4tkc5o)
-- [Wan21](https://runpod.io/console/deploy?template=w97tab8ql0&ref=se4tkc5o)
+- [HunyuanVideo](https://console.runpod.io/deploy?template=5avqh2xkq3&ref=se4tkc5o)
+- [Wan22](https://console.runpod.io/deploy?template=w97tab8ql0&ref=se4tkc5o)
 
 ## Setup
 
 | Component | Version              |
 |-----------|----------------------|
-| OS        | `Ubuntu 22.x x86_64` |
+| OS        | `Ubuntu 22.04 x86_64` |
 | Python    | `3.11.x`             |
-| PyTorch   | `2.7.1`              |
-| CUDA      | `12.8`               |
+| PyTorch   | `2.8.0`              |
+| CUDA      | `12.9.1`             |
+| Triton    | `3.4.0`               |
+| nvcc      | `12.9.x`            |
+| diffusion pipe     | latest     |
+| code server    | latest     |
+
+## Installed Attentions
+
+### Wheels
+
+| Package        | Version  |
+|----------------|----------|
+| flash_attn     | 2.8.3    |
+| sageattention  | 2.2.0    |
+
+### Build for
+
+| Processor | Compute Capability | SM |
+|------------|-----------------|-----------|
+| A40  | 8.6 | sm_86b |
+| L40S | 8.9 | sm_89 |
 
 ## Available Images
 
 ### Image
 
-```txt
-Base Image: ls250824/pytorch-cuda-ubuntu-develop:<version>
-```
+- Base Image: ls250824/pytorch-cuda-ubuntu-develop:<version>
 
 [![Docker Image Version](https://img.shields.io/docker/v/ls250824/pytorch-cuda-ubuntu-develop)](https://hub.docker.com/r/ls250824/pytorch-cuda-ubuntu-develop)
 
-#### Custom Build: 
+### Custom Build: 
 
 ```bash
 docker pull ls250824/run-diffusion-pipe:<version>
@@ -69,14 +87,14 @@ docker pull ls250824/run-diffusion-pipe:<version>
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
 
-### **Diffusion Models Setup WAN2.1 and WAN2.2 **  
+### **Diffusion Models Setup WAN2.1 and WAN2.2**  
 
 | Model Type        | Model                   |
 |-------------------|-------------------------| 
 | Checkpoint        | `HF_MODEL_CKPT`         |
 
 
-### **Diffusion Models Setup Qwen-image, Omnigen2 **  
+### **Diffusion Models Setup Qwen-image, Omnigen2**  
 
 | Model Type        | Model                   |
 |-------------------|-------------------------| 
@@ -123,6 +141,7 @@ docker pull ls250824/run-diffusion-pipe:<version>
 - [Omnigen2](provisioning/omnigen2.md)
 - [Phantom](provisioning/phantom.md)
 - [Qwen-image](provisioning/qwen-image.md)
+- [Qwen-image-edit 2509](provisioning/qwen-image-edit.md)
 
 ## Supported models and information
 
@@ -136,8 +155,8 @@ docker pull ls250824/run-diffusion-pipe:<version>
 - [Wan22 low noise](config_examples/wan22_low_noise_config.toml)
 - [Wan22 high noise](config_examples/wan22_high_noise_config.toml)
 - [Omnigen2](config_examples/omnigen2_config.toml)
-- [Qwen-image](config_examples/qwen-image_config.toml)
 - [Qwen-image-24gb](config_examples/qwen-image_24gb_config.toml)
+- [Qwen-image-edit-24gb](config_examples/qwen-image-edit_24gb_config.toml)
 
 ## Example dataset
 
@@ -196,7 +215,10 @@ Run the following command to clone the repository and build the image:
 git clone https://github.com/jalberty2018/run-diffusion-pipe.git
 mv ./run-diffusion-pipe/build_docker.py ..
 
-python3 build-docker.py \
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
+python build-docker.py \
 --username=<your_dockerhub_username> \
 --tag=<custom_tag> \ 
 run-diffusion-pipe
