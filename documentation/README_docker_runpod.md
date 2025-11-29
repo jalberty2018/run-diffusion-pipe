@@ -1,6 +1,4 @@
-[![Docker Image Version](https://img.shields.io/docker/v/ls250824/run-diffusion-pipe)](https://hub.docker.com/r/ls250824/run-diffusion-pipe)
-
-# run-diffusion-pipe on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+# run-diffusion-pipe
 
 ## Synopsis
 
@@ -18,23 +16,22 @@ See below for options.
 
 ## Hardware provisioning
 
-- [Runpod.io](https://runpod.io/)
 - GPU RTX A5000 , A40 (cheapest options)
 - Pod volume: 80Gb / 100 Gb (depending on your dataset and model size)
 
-## Template [RunPod.io](https://runpod.io?ref=se4tkc5o)
+## Templates [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
 - [HunyuanVideo](https://console.runpod.io/deploy?template=5avqh2xkq3&ref=se4tkc5o)
-- [Wan22](https://console.runpod.io/deploy?template=w97tab8ql0&ref=se4tkc5o)
+- [WAN 2.2](https://console.runpod.io/deploy?template=w97tab8ql0&ref=se4tkc5o)
 
 ## Setup
 
 | Component | Version              |
 |-----------|----------------------|
-| OS        | `Ubuntu 24.04 x86_64`|
+| OS        | `Ubuntu 22.04 x86_64`|
 | Python    | `3.11.x`             |
-| PyTorch   | `2.8.0`              |
-| CUDA      | `12.9.x`             |
+| PyTorch   | `2.9.1`              |
+| CUDA      | `12.8.x`             |
 | Triton    | `3.4.x`              |
 | onnxruntime-gpu | `1.22.x` |
 | ComfyUI | Latest |
@@ -55,22 +52,6 @@ See below for options.
 |------------|-----------------|-----------|
 | A40  | 8.6 | sm_86 |
 | L40S | 8.9 | sm_89 |
-
-## Available Images
-
-### Image
-
-```txt
-Base Image: ls250824/pytorch-cuda-ubuntu-develop:<version>
-```
-
-[![Docker Image Version](https://img.shields.io/docker/v/ls250824/pytorch-cuda-ubuntu-develop)](https://hub.docker.com/r/ls250824/pytorch-cuda-ubuntu-develop)
-
-#### Custom Build: 
-
-```bash
-docker pull ls250824/run-diffusion-pipe:<version>
-```
 
 ## Environment Variables  
 
@@ -121,12 +102,6 @@ docker pull ls250824/run-diffusion-pipe:<version>
 - [tensorboard](https://www.tensorflow.org/tensorboard)
 - [huggingface hub](https://huggingface.co/docs/huggingface_hub/index)
 - [Flash attention](https://github.com/Dao-AILab/flash-attention)
-
-## Tutorial
-
-- [Hunyuanvideo](https://civitai.com/articles/9798/training-a-lora-for-hunyuan-video-on-windows)
-- [Wan](https://www.stablediffusiontutorials.com/2025/03/wan-lora-train.html)
-- [Lora training](https://civitai.com/articles/3105/essential-to-advanced-guide-to-training-a-lora)
 
 ## Supported models
 

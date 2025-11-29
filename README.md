@@ -1,6 +1,6 @@
 [![Docker Image Version](https://img.shields.io/docker/v/ls250824/run-diffusion-pipe)](https://hub.docker.com/r/ls250824/run-diffusion-pipe)
 
-# run-diffusion-pipe on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+# run-diffusion-pipe on RunPod
 
 ## Synopsis
 
@@ -24,45 +24,23 @@ See below for options.
 ![Tensorboard high noise model](images/tensorboard-high1.jpg)
 ![Tensorboard low noise model](images/tensorboard-low1.jpg)
 
-## Hardware provisioning
-
-- [Runpod.io](https://runpod.io/)
-- GPU RTX A5000 , A40, L40S
-- Pod volume: 80Gb / 100 Gb (depending on your dataset and model size)
 
 ## Template [RunPod.io](https://runpod.io?ref=se4tkc5o)
 
 - [HunyuanVideo](https://console.runpod.io/deploy?template=5avqh2xkq3&ref=se4tkc5o)
 - [Wan22](https://console.runpod.io/deploy?template=w97tab8ql0&ref=se4tkc5o)
 
+## 📚 Documentation
+
+- [📚 Resources](docs/diffusion_pipe_resources.md)
+- [📦 Model provisioning](docs/diffusion_pipe_provisioning.md)
+- [🧩 Config examples](docs/diffusion_pipe_config_examples.md)
+- [⚙️ Start training](docs/diffusion_pipe_start_training.md)
+- [💻 Hardware Requirements](docs/diffusion_pipe_hardware.md)
+- [⚙️ Image setup](docs/diffusion_pipe_image_setup.md)
+- [⚙️ Environment variables](docs/diffusion_pipe_configuration.md)
+
 ## Setup
-
-| Component | Version              |
-|-----------|----------------------|
-| OS        | `Ubuntu 22.04 x86_64` |
-| Python    | `3.11.x`             |
-| PyTorch   | `2.8.0`              |
-| CUDA      | `12.9.1`             |
-| Triton    | `3.4.0`               |
-| nvcc      | `12.9.x`            |
-| diffusion pipe     | latest     |
-| code server    | latest     |
-
-## Installed Attentions
-
-### Wheels
-
-| Package        | Version  |
-|----------------|----------|
-| flash_attn     | 2.8.3    |
-| sageattention  | 2.2.0    |
-
-### Build for
-
-| Processor | Compute Capability | SM |
-|------------|-----------------|-----------|
-| A40  | 8.6 | sm_86b |
-| L40S | 8.9 | sm_89 |
 
 ## Available Images
 
@@ -76,122 +54,6 @@ See below for options.
 
 ```bash
 docker pull ls250824/run-diffusion-pipe:<version>
-```
-
-## Environment Variables  
-
-### **Authentication Tokens**  
-
-| Token        | Environment Variable |
-|--------------|----------------------|
-| Huggingface  | `HF_TOKEN`           |
-| Code Server  | `PASSWORD`           |
-
-### **Diffusion Models Setup WAN2.1 and WAN2.2**  
-
-| Model Type        | Model                   |
-|-------------------|-------------------------| 
-| Checkpoint        | `HF_MODEL_CKPT`         |
-
-
-### **Diffusion Models Setup Qwen-image, Omnigen2**  
-
-| Model Type        | Model                   |
-|-------------------|-------------------------| 
-| Diffusers         | `HF_MODEL_DIFFUSERS`    | 
-
-### **Diffusion Models Setup Hunyuanvideo**  
-
-| Model Type        | Model                   | Safetensors                        |
-|-------------------|-------------------------|------------------------------------| 
-| Diffusion Model   | `HF_MODEL_TRANSFORMER`  | `HF_MODEL_TRANSFORMER_SAFETENSORS` |
-| VAE               | `HF_MODEL_VAE`          | `HF_MODEL_VAE_SAFETENSORS`         |
-| LLM               | `HF_MODEL_LLM`          |                                    |
-| CLIP              | `HF_MODEL_CLIP`         |                                    |
-                                 
-## Connection options 
-
-### Services
-
-| Service         | Port          |
-|-----------------|---------------| 
-| **Tensorboard** | `6006` (HTTP) |
-| **Code Server** | `9000` (HTTP) |
-| **SSH/SCP**     | `22`   (TCP)  |
-
-## Websites
-
-- [diffusion-pipe](https://github.com/tdrussell/diffusion-pipe)
-- [code server](https://github.com/coder/code-server)
-- [tensorboard](https://www.tensorflow.org/tensorboard)
-- [huggingface hub](https://huggingface.co/docs/huggingface_hub/index)
-- [Flash attention](https://github.com/Dao-AILab/flash-attention)
-
-## Tutorial
-
-- [Hunyuanvideo](https://civitai.com/articles/9798/training-a-lora-for-hunyuan-video-on-windows)
-- [Wan](https://www.stablediffusiontutorials.com/2025/03/wan-lora-train.html)
-- [Lora training](https://civitai.com/articles/3105/essential-to-advanced-guide-to-training-a-lora)
-
-## Manuel provisioning
-
-- [hunyuanVideo](provisioning/hunyuanvideo.md)
-- [Wan 2.1](provisioning/wan21.md)
-- [Wan 2.2](provisioning/wan22.md)
-- [Omnigen2](provisioning/omnigen2.md)
-- [Phantom](provisioning/phantom.md)
-- [Qwen-image](provisioning/qwen-image.md)
-- [Qwen-image-edit 2509](provisioning/qwen-image-edit.md)
-
-## Supported models and information
-
-- [doc](https://github.com/tdrussell/diffusion-pipe/blob/main/docs/supported_models.md)
-
-## Example config_examples
-
-- [Hunyuanvideo](config_examples/hunyuanvideo_config.toml)
-- [Wan21](config_examples/wan21_config.toml)
-- [Wan22](config_examples/wan22_config.toml)
-- [Wan22 low noise](config_examples/wan22_low_noise_config.toml)
-- [Wan22 high noise](config_examples/wan22_high_noise_config.toml)
-- [Omnigen2](config_examples/omnigen2_config.toml)
-- [Qwen-image-24gb](config_examples/qwen-image_24gb_config.toml)
-- [Qwen-image-edit-24gb](config_examples/qwen-image-edit_24gb_config.toml)
-
-## Example dataset
-
-- [dataset](config_examples/dataset.toml)
-
-## Start training RTX A5000, A40, L40S
-
-### WAN 2.1 and others
-
-```bash
-cd diffusion-pipe
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
-```
-
-### Qwen Image 
-
-```bash
-pip uninstall diffusers
-pip install git+https://github.com/huggingface/diffusers
-cd diffusion-pipe
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
-```
-
-### WAN 2.2
-
-```bash 
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_low.toml
-
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_high.toml
-```
-
-### Resume training (--resume_from_checkpoint)
-
-```bash
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --resume_from_checkpoint --config /workspace/x/config.toml
 ```
 
 ## Building the Docker Image 
