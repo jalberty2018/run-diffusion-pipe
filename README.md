@@ -4,9 +4,6 @@
 
 ## Synopsis
 
-A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**, **Qwen-image**. 
-This pod downloads models as specified in the **environment variables** set in the template
-
 - Models are automatically downloaded based on the specified paths in the environment configuration.  
 - Authentication credentials can be set via secrets for:  
   - **Code server** authentication (not possible to switch off) 
@@ -15,17 +12,17 @@ This pod downloads models as specified in the **environment variables** set in t
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
 
-## Training WAN 2.2 image lora on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+## Training WAN 2.2 image lora on RunPod
 
 ![High Low noise training](images/runpod.jpg)
 
-## Tensorboard on [RunPod.io](https://runpod.io?ref=se4tkc5o)
+## Tensorboard on RunPod
 
 ![Tensorboard high noise model](images/tensorboard-high1.jpg)
 ![Tensorboard low noise model](images/tensorboard-low1.jpg)
 
 
-## Template [RunPod.io](https://runpod.io?ref=se4tkc5o)
+## Template RunPod
 
 - [HunyuanVideo](https://console.runpod.io/deploy?template=5avqh2xkq3&ref=se4tkc5o)
 - [Wan22](https://console.runpod.io/deploy?template=w97tab8ql0&ref=se4tkc5o)

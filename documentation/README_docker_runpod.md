@@ -2,10 +2,6 @@
 
 ## Synopsis
 
-A streamlined setup for running **diffusion-pipe** for **HunyuanVideo**, **WAN** **Omnigen2**, **Qwen-image**. 
-This pod downloads models as specified in the **environment variables** set in the template
-
-
 - Models are automatically downloaded based on the specified paths in the environment configuration.  
 - Authentication credentials can be set via secrets for:  
   - **Code server** authentication (not possible to switch off) 
@@ -16,26 +12,21 @@ See below for options.
 
 ## Hardware provisioning
 
-- GPU RTX A5000 , A40 (cheapest options)
+- GPU RTX A5000 , RTX 4090, A40 (cheapest options)
 - Pod volume: 80Gb / 100 Gb (depending on your dataset and model size)
 
-## Templates [RunPod.io](https://runpod.io?ref=se4tkc5o)
-
-- [HunyuanVideo](https://console.runpod.io/deploy?template=5avqh2xkq3&ref=se4tkc5o)
-- [WAN 2.2](https://console.runpod.io/deploy?template=w97tab8ql0&ref=se4tkc5o)
-
-## Setup
+## Image setup
 
 | Component | Version              |
 |-----------|----------------------|
-| OS        | `Ubuntu 22.04 x86_64`|
+| OS        | `Ubuntu 22.04 x86_64` |
 | Python    | `3.11.x`             |
-| PyTorch   | `2.9.1`              |
-| CUDA      | `12.8.x`             |
-| Triton    | `3.4.x`              |
-| onnxruntime-gpu | `1.22.x` |
-| ComfyUI | Latest |
-| CodeServer | Latest |
+| PyTorch   | `2.8.0`              |
+| CUDA      | `12.9.1`             |
+| Triton    | `3.4.0`               |
+| nvcc      | `12.9.x`            |
+| diffusion pipe     | latest     |
+| code server    | latest     |
 
 ## Installed Attentions
 
@@ -50,7 +41,7 @@ See below for options.
 
 | Processor | Compute Capability | SM |
 |------------|-----------------|-----------|
-| A40  | 8.6 | sm_86 |
+| A40  | 8.6 | sm_86b |
 | L40S | 8.9 | sm_89 |
 
 ## Environment Variables  
@@ -62,28 +53,12 @@ See below for options.
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
 
-### **Diffusion Models Setup WAN2.1 and WAN2.2**  
+## Huggingface model configuration
 
-| Model Type        | Model                   |
-|-------------------|-------------------------| 
-| Checkpoint        | `HF_MODEL_CKPT`         |
-
-
-### **Diffusion Models Setup Qwen-image, Omnigen2**  
-
-| Model Type        | Model                   |
-|-------------------|-------------------------| 
-| Diffusers         | `HF_MODEL_DIFFUSERS`    | 
-
-
-### **Diffusion Models Setup Hunyuanvideo**  
-
-| Model Type        | Model                   | Safetensors                        |
-|-------------------|-------------------------|------------------------------------| 
-| Diffusion Model   | `HF_MODEL_TRANSFORMER`  | `HF_MODEL_TRANSFORMER_SAFETENSORS` |
-| VAE               | `HF_MODEL_VAE`          | `HF_MODEL_VAE_SAFETENSORS`         |
-| LLM               | `HF_MODEL_LLM`          |                                    |
-| CLIP              | `HF_MODEL_CLIP`         |                                    |
+| Type  | Model     | Safetensors |  /workspace/models/<Directory> |
+|-------|-----------|------------------|---------------------------------|  
+| File  | `HF_MODEL[1-20]`  | `HF_MODEL_FILENAME[1-20]`   | `HF_MODEL_DIR[1-20]` |
+| Dir   | `HF_FULL_MODEL[1-20]`  |   | `HF_FULL_MODEL_DIR[1-20]` |
 
 ## Connection options 
 

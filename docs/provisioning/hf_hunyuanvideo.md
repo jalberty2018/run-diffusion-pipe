@@ -1,4 +1,4 @@
-# Provisioning Hunyuanvideo
+# Provisioning Hunyuanvideo 1.0
 
 - [Documentation](https://github.com/tdrussell/diffusion-pipe/blob/main/docs/supported_models.md)
 

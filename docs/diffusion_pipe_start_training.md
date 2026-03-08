@@ -1,4 +1,4 @@
-# Start training RTX A5000, A40, L40S
+# Start training
 
 ## WAN 2.1 and others
 

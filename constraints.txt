@@ -1,0 +1,4 @@
+# Attention / performance libs
+flash-attn==2.8.3
+sageattention==2.2.0
+

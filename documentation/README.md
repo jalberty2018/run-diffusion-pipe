@@ -1,5 +1,14 @@
 # run-diffusion-pipe
 
+## Documentation
+
+- [Resources](/workspace/docs/diffusion_pipe_resources.md)
+- [Model provisioning](/workspace/docs/diffusion_pipe_provisioning.md)
+- [Config examples](/workspace/docs/diffusion_pipe_config_examples.md)
+- [Start training](/workspace/docs/diffusion_pipe_start_training.md)
+- [Hardware Requirements](/workspace/docs/diffusion_pipe_hardware.md)
+- [Image setup](/workspace/docs/diffusion_pipe_image_setup.md)
+- [Environment variables](/workspace/docs/diffusion_pipe_configuration.md)
 
 ## 7z
 

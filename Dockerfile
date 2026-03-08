@@ -4,17 +4,11 @@ FROM ls250824/pytorch-cuda-ubuntu-develop:08112025
 # Set working directory
 WORKDIR /
 
-# Copy start script
-COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/docs-on-workspace.sh onworkspace/readme-on-workspace.sh /
-
-# Copy supporting files
-COPY --chmod=664 /documentation/README.md /README.md
-
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# Pin flash & sage
-RUN printf "flash_attn==2.8.3\nsageattention==2.2.0\n" > /constraints.txt
+# Pin
+COPY constraints.txt /constraints.txt
 
 # Download wheels
 RUN wget -q https://github.com/jalberty2018/run-pytorch-cuda-develop/releases/download/v1.3.1/flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl && \
@@ -25,8 +19,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
       ./flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl \
       ./sageattention-2.2.0-cp311-cp311-linux_x86_64.whl \
-	  ./torch_generic_nms-0.1-cp311-cp311-linux_x86_64.whl \
-      "huggingface_hub[cli]" && \
+      "huggingface_hub" && \
     rm -f flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl \
           sageattention-2.2.0-cp311-cp311-linux_x86_64.whl
 
@@ -34,8 +27,14 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN --mount=type=cache,target=/root/.cache/git \
     git clone --recurse-submodules https://github.com/tdrussell/diffusion-pipe
 
-# Install diffusion-pipe
-WORKDIR /diffusion-pipe	
+WORKDIR /
+
+# Copy start script
+COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/docs-on-workspace.sh onworkspace/readme-on-workspace.sh /
+
+# Copy supporting files
+COPY --chmod=664 /documentation/README.md /README.md
+COPY --chmod=644 docs/ /docs
 
 # Set working directory for runtime
 WORKDIR /workspace

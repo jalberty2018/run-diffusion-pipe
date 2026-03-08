@@ -7,3 +7,4 @@
 - [qwen-image](provisioning/hf_qwen_image.md)
 - [WAN 2.1](provisioning/hf_wan_21.md)
 - [WAN 2.2](provisioning/hf_wan_22.md)
+- [Z-image turbo](provisioning/hf_z_image_turbo.md)

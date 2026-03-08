@@ -12,6 +12,15 @@ if [[ -n "$PUBLIC_KEY" ]]; then
     echo "✅ [SSH enabled]"
 fi
 
+# Export env variables
+if [[ -n "${RUNPOD_GPU_COUNT:-}" ]]; then
+   echo "ℹ️ Exporting runpod.io environment variables..."
+   printenv | grep -E '^RUNPOD_|^PATH=|^_=' \
+     | awk -F = '{ print "export " $1 "=\"" $2 "\"" }' >> /etc/rp_environment
+
+   echo 'source /etc/rp_environment' >> ~/.bashrc
+fi
+
 # Move necessary files to workspace
 echo "ℹ️ [Moving necessary files to workspace] enabling rebooting pod without data loss"
 for script in diffusion-pipe-on-workspace.sh readme-on-workspace.sh docs-on-workspace.sh; do
@@ -96,49 +105,57 @@ else
     echo "❌ ERROR: PyTorch CUDA driver mismatch or unavailable, tensorboard not started"
 fi
 	
-# Function to download models if variables are set
-download_model_HF2() {
+# Create workspace directories if they don’t exist
+mkdir -p /workspace/output
+
+download_HF() {
     local model_var="$1"
     local file_var="$2"
     local dest_dir="$3"
 
-	local target="/workspace/models/$dest_dir"
-    mkdir -p "$target"
-	
-    if [[ -n "${!model_var}" && -n "${!file_var}" ]]; then
-       echo "ℹ️ [DOWNLOAD] Fetching ${!model_var}/${!file_var} → $target"		
-	   hf download "${!model_var}" "${!file_var}" --local-dir "$target" || \
-            echo "⚠️ Failed to download ${!model_var}/${!file_var}"
-       sleep 1
-    fi
-}
+    local model="${!model_var}"
+    [[ -z "$model" ]] && return 0
 
-download_model_HF1() {
-    local model_var="$1"
-    local dest_dir="$2"
-	
-	local target="/workspace/models/$dest_dir"
-    mkdir -p "$target"
-	
-	echo "ℹ️ [DOWNLOAD] Fetching ${!model_var}/${!file_var} → $target"		
-	   hf download "${!model_var}"  --local-dir "$target" || \
-            echo "⚠️ Failed to download ${!model_var}"
-       sleep 1
+    local file=""
+    if [[ -n "$file_var" ]]; then
+        file="${!file_var}"
     fi
-}
 
-# Create workspace directories if they don’t exist
-mkdir -p /workspace/output
+    local target="/workspace/models/$dest_dir"
+    mkdir -p "$target"
+
+    if [[ -n "$file" ]]; then
+        echo "ℹ️ [DOWNLOAD] Fetching $model/$file → $target"
+        hf download "$model" "$file" --local-dir "$target" || \
+            echo "⚠️ Failed to download $model/$file"
+    else
+        echo "ℹ️ [DOWNLOAD] Fetching $model → $target"
+        hf download "$model" --local-dir "$target" || \
+            echo "⚠️ Failed to download $model"
+    fi
+
+    sleep 1
+    return 0
+}
 
 # Provisioning if running on GPU with CUDA
 if [[ "$HAS_CUDA" -eq 1 ]]; then  
    echo "📥 Provisioning models"
-   download_model_HF2 HF_MODEL_VAE HF_MODEL_VAE_SAFETENSORS "vae"
-   download_model_HF2 HF_MODEL_TRANSFORMER HF_MODEL_TRANSFORMER_SAFETENSORS "transformer"
-   download_model_HF1 HF_MODEL_LLM "llm"
-   download_model_HF1 HF_MODEL_CLIP "clip"
-   download_model_HF1 HF_MODEL_CKPT "ckpt_path"
-   download_model_HF1 HF_MODEL_DIFFUSERS "diffusers_path"
+   
+   # Huggingface download file to specified directory
+    for i in $(seq 1 20); do
+        VAR1="HF_MODEL${i}"
+        VAR2="HF_MODEL_FILENAME${i}"
+        DIR_VAR="HF_MODEL_DIR${i}"
+        download_HF "${VAR1}" "${VAR2}" "${!DIR_VAR}"
+    done
+	
+    # Huggingface download full model to specified directory
+    for i in $(seq 1 20); do
+        VAR1="HF_FULL_MODEL${i}"
+        DIR_VAR="HF_MODEL_DIR${i}"
+        download_HF "${VAR1}" "" "${!DIR_VAR}"
+    done  
 
    HAS_PROVISIONING=1
 else
