@@ -35,7 +35,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN python3 - <<'PY'
 from pathlib import Path
 
-path = Path("/workspace/diffusion-pipe/utils/cache.py")
+path = Path("/diffusion-pipe/utils/cache.py")
 if not path.exists():
     raise SystemExit(f"File not found: {path}")
 
