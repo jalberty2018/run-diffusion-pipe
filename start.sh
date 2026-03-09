@@ -212,19 +212,47 @@ if [[ "$HAS_PROVISIONING" -eq 1 ]]; then
     echo "🎉 Provisioning done, ready to train AI content 🎉"
     
     if [[ "$HAS_GPU_RUNPOD" -eq 1 ]]; then
-        echo "ℹ️ Connect to Code-Server or terminal emulator from console menu on runpod.io"
+        echo "ℹ️ Connect to the following services from console menu or url"
+	
+	  if [[ -z "${RUNPOD_POD_ID:-}" ]]; then
+	    echo "⚠️ RUNPOD_POD_ID not set — service URLs unavailable"
+	  else
+	    declare -A SERVICES=(
+	      ["Code-Server"]=9000
+		  ["Tensorboard"]=6006
+	    )
+	
+	    # Local health checks (inside the pod)
+	    for service in "${!SERVICES[@]}"; do
+	      port="${SERVICES[$service]}"
+	      url="https://${RUNPOD_POD_ID}-${port}.proxy.runpod.net/"
+	      local_url="http://127.0.0.1:${port}/"
+	
+	      echo "👉 🔗 Service ${service} : ${url}"
+	
+	      # Check service locally (no proxy dependency)
+	      http_code="$(curl -sS -o /dev/null -m 2 --connect-timeout 1 -w "%{http_code}" "$local_url" || true)"
+	
+	      # Treat common “service is up but protected/redirect” codes as UP
+	      if [[ "$http_code" =~ ^(200|301|302|401|403|404)$ ]]; then
+	        echo "✅ ${service} is running (local ${local_url}, HTTP ${http_code})"
+	      else
+	        echo "❌ ${service} not responding yet (local ${local_url}, HTTP ${http_code})"
+	      fi
+	    done
+	  fi
     fi
 else
     echo "ℹ️ Running error diagnosis"
 
     if [[ "$HAS_GPU_RUNPOD" -eq 0 ]]; then
-        echo "⚠️ Pod started without a runpod.io GPU"
+        echo "⚠️ Pod started without a runpod GPU"
     fi
 
     if [[ "$HAS_CUDA" -eq 0 ]]; then
         echo "❌ Pytorch CUDA driver error/mismatch/not available"
         if [[ "$HAS_GPU_RUNPOD" -eq 1 ]]; then
-            echo "⚠️ [SOLUTION] Deploy pod on another region ⚠️"
+            echo "⚠️ [SOLUTION] Deploy pod on another region then $RUNPOD_DC_ID ⚠️"
         fi
     fi
     

@@ -23,13 +23,33 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     rm -f flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl \
           sageattention-2.2.0-cp311-cp311-linux_x86_64.whl
 
-# Clone install diffusion-pipe 
+# Clone install diffusion-pipe a17e5c1da254afeae66cab809e3ca547501dd067
 RUN --mount=type=cache,target=/root/.cache/git \
     git clone --recurse-submodules https://github.com/tdrussell/diffusion-pipe
 
 RUN --mount=type=cache,target=/root/.cache/pip \
   python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
     -r diffusion-pipe/requirements.txt
+
+# Python 3.11 fix
+RUN python3 - <<'PY'
+from pathlib import Path
+
+path = Path("/workspace/diffusion-pipe/utils/cache.py")
+if not path.exists():
+    raise SystemExit(f"File not found: {path}")
+
+text = path.read_text(encoding="utf-8")
+old = "sqlite3.connect(self.metadata_db, autocommit=False)"
+new = "sqlite3.connect(self.metadata_db)"
+
+if old in text:
+    text = text.replace(old, new)
+    path.write_text(text, encoding="utf-8")
+    print("✅ diffusion-pipe sqlite patched")
+else:
+    print("ℹ️ no patch needed")
+PY
 
 # Copy start script
 COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/docs-on-workspace.sh onworkspace/readme-on-workspace.sh /
