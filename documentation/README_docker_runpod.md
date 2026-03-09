@@ -58,7 +58,7 @@ See below for options.
 | Type  | Model     | Safetensors |  /workspace/models/<Directory> |
 |-------|-----------|------------------|---------------------------------|  
 | File  | `HF_MODEL[1-20]`  | `HF_MODEL_FILENAME[1-20]`   | `HF_MODEL_DIR[1-20]` |
-| Dir   | `HF_FULL_MODEL[1-20]`  |   | `HF_FULL_MODEL_DIR[1-20]` |
+| Dir   | `HF_FULL_MODEL[1-20]`  |   | `HF_MODEL_DIR[1-20]` |
 
 ## Connection options 
 

@@ -27,7 +27,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN --mount=type=cache,target=/root/.cache/git \
     git clone --recurse-submodules https://github.com/tdrussell/diffusion-pipe
 
-WORKDIR /
+RUN --mount=type=cache,target=/root/.cache/pip \
+  python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
+    -r diffusion-pipe/requirements.txt
 
 # Copy start script
 COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/docs-on-workspace.sh onworkspace/readme-on-workspace.sh /
