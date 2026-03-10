@@ -21,10 +21,10 @@ See below for options.
 |-----------|----------------------|
 | OS        | `Ubuntu 22.04 x86_64` |
 | Python    | `3.11.x`             |
-| PyTorch   | `2.8.0`              |
-| CUDA      | `12.9.1`             |
+| PyTorch   | `2.9.0`              |
+| CUDA      | `12.8.1`             |
 | Triton    | `3.4.0`               |
-| nvcc      | `12.9.x`            |
+| nvcc      | `12.8.x`            |
 | diffusion pipe     | latest     |
 | code server    | latest     |
 

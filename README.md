@@ -1,6 +1,6 @@
 [![Docker Image Version](https://img.shields.io/docker/v/ls250824/run-diffusion-pipe)](https://hub.docker.com/r/ls250824/run-diffusion-pipe)
 
-# run-diffusion-pipe on RunPod
+# run-diffusion-pipe
 
 ## Synopsis
 
@@ -12,20 +12,13 @@
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
 
-## Training WAN 2.2 image lora on RunPod
+## Training WAN High/Low lora on RunPod
 
 ![High Low noise training](images/runpod.jpg)
 
-## Tensorboard on RunPod
+## Tensorboard
 
-![Tensorboard high noise model](images/tensorboard-high1.jpg)
-![Tensorboard low noise model](images/tensorboard-low1.jpg)
-
-
-## Template RunPod
-
-- [HunyuanVideo](https://console.runpod.io/deploy?template=5avqh2xkq3&ref=se4tkc5o)
-- [Wan22](https://console.runpod.io/deploy?template=w97tab8ql0&ref=se4tkc5o)
+![Tensorboard ](images/tensorboard.jpg)
 
 ## 📚 Documentation
 
@@ -39,19 +32,9 @@ See below for options.
 
 ## Setup
 
-## Available Images
+- Base Image: ls250824/pytorch-cuda-ubuntu-develop:<[![Docker Base Image Version](https://img.shields.io/docker/v/ls250824/pytorch-cuda-ubuntu-develop)](https://hub.docker.com/r/ls250824/pytorch-cuda-ubuntu-develop)>
 
-### Image
-
-- Base Image: ls250824/pytorch-cuda-ubuntu-develop:<version>
-
-[![Docker Image Version](https://img.shields.io/docker/v/ls250824/pytorch-cuda-ubuntu-develop)](https://hub.docker.com/r/ls250824/pytorch-cuda-ubuntu-develop)
-
-### Custom Build: 
-
-```bash
-docker pull ls250824/run-diffusion-pipe:<version>
-```
+- Image: ls250824/run-diffusion-pipe:<[![Docker Image Version](https://img.shields.io/docker/v/ls250824/run-diffusion-pipe)](https://hub.docker.com/r/ls250824/run-diffusion-pipe)>
 
 ## Building the Docker Image 
 

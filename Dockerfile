@@ -23,7 +23,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     rm -f flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl \
           sageattention-2.2.0-cp311-cp311-linux_x86_64.whl
 
-# Clone install diffusion-pipe a17e5c1da254afeae66cab809e3ca547501dd067
+# Clone install diffusion-pipe (a17e5c1da254afeae66cab809e3ca547501dd067)
 RUN --mount=type=cache,target=/root/.cache/git \
     git clone --recurse-submodules https://github.com/tdrussell/diffusion-pipe
 
@@ -66,7 +66,7 @@ EXPOSE 9000 6006
 
 # Labels
 LABEL org.opencontainers.image.title="Diffusion pipe Image" \
-      org.opencontainers.image.description="Pytorch 2.9 CUDA 12.8 devel + Ubuntu 22.04 + Python + code-server + diffusion pipe" \
+      org.opencontainers.image.description="Pytorch 2.9 CUDA 12.8 devel + code-server + diffusion pipe" \
       org.opencontainers.image.source="https://hub.docker.com/r/ls250824/run-diffusion-pipe" \
       org.opencontainers.image.licenses="MIT"
 
