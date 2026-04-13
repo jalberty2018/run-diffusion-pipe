@@ -12,8 +12,8 @@ See below for options.
 
 ## Hardware provisioning
 
-- GPU RTX A5000 , RTX 4090, A40 (cheapest options)
-- Pod volume: 80Gb / 100 Gb (depending on your dataset and model size)
+- GPU RTX A5000 , RTX 4090
+- Pod volume: 60Gb / 80 Gb (depending on your dataset and model size)
 
 ## Image setup
 
@@ -41,8 +41,8 @@ See below for options.
 
 | Processor | Compute Capability | SM |
 |------------|-----------------|-----------|
-| A40  | 8.6 | sm_86b |
-| L40S | 8.9 | sm_89 |
+| RTX A5000  | 8.6 | sm_86b |
+| RTX 4090 | 8.9 | sm_89 |
 
 ## Environment Variables  
 

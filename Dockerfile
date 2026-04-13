@@ -4,11 +4,11 @@ FROM ls250824/pytorch-cuda-ubuntu-develop:08112025
 # Set working directory
 WORKDIR /
 
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-
 # Pin
 COPY constraints.txt /constraints.txt
+
+# Install code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Download wheels
 RUN wget -q https://github.com/jalberty2018/run-pytorch-cuda-develop/releases/download/v1.3.1/flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl && \
@@ -23,7 +23,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     rm -f flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl \
           sageattention-2.2.0-cp311-cp311-linux_x86_64.whl
 
-# Clone install diffusion-pipe (a17e5c1da254afeae66cab809e3ca547501dd067)
+# Clone install diffusion-pipe (518ba041d867e6d76c31806a8d0b6a0263fb22eb)
 RUN --mount=type=cache,target=/root/.cache/git \
     git clone --recurse-submodules https://github.com/tdrussell/diffusion-pipe
 
