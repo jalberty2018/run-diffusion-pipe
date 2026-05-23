@@ -7,9 +7,6 @@ WORKDIR /
 # Pin
 COPY constraints.txt /constraints.txt
 
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-
 # Download wheels
 RUN wget -q https://github.com/jalberty2018/run-pytorch-cuda-develop/releases/download/v1.3.1/flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl && \
     wget -q https://github.com/jalberty2018/run-pytorch-cuda-develop/releases/download/v1.3.1/sageattention-2.2.0-cp311-cp311-linux_x86_64.whl
@@ -18,19 +15,21 @@ RUN wget -q https://github.com/jalberty2018/run-pytorch-cuda-develop/releases/do
 RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
       ./flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl \
-      ./sageattention-2.2.0-cp311-cp311-linux_x86_64.whl \
-      "huggingface_hub" && \
+      ./sageattention-2.2.0-cp311-cp311-linux_x86_64.whl && \
     rm -f flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl \
           sageattention-2.2.0-cp311-cp311-linux_x86_64.whl
+		  
+# Install code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# Clone install diffusion-pipe (518ba041d867e6d76c31806a8d0b6a0263fb22eb)
+# Clone install diffusion-pipe (238b5e1a24f35047c6d37ea9ae36ff7e3e399b8b)
 RUN --mount=type=cache,target=/root/.cache/git \
     git clone --recurse-submodules https://github.com/tdrussell/diffusion-pipe
 
 RUN --mount=type=cache,target=/root/.cache/pip \
   python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
     -r diffusion-pipe/requirements.txt
-
+	
 # Python 3.11 fix
 RUN python3 - <<'PY'
 from pathlib import Path
@@ -51,6 +50,11 @@ else:
     print("ℹ️ no patch needed")
 PY
 
+# Install huggingface
+RUN --mount=type=cache,target=/root/.cache/pip \
+    python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
+      "huggingface_hub"
+
 # Copy start script
 COPY --chmod=755 start.sh onworkspace/diffusion-pipe-on-workspace.sh onworkspace/docs-on-workspace.sh onworkspace/readme-on-workspace.sh /
 
@@ -65,7 +69,7 @@ WORKDIR /workspace
 EXPOSE 9000 6006
 
 # Labels
-LABEL org.opencontainers.image.title="Diffusion pipe Image" \
+LABEL org.opencontainers.image.title="Diffusion-Pipe" \
       org.opencontainers.image.description="Pytorch 2.9 CUDA 12.8 devel + code-server + diffusion pipe" \
       org.opencontainers.image.source="https://hub.docker.com/r/ls250824/run-diffusion-pipe" \
       org.opencontainers.image.licenses="MIT"

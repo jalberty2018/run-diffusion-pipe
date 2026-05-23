@@ -8,3 +8,4 @@
 - [WAN 2.1](provisioning/hf_wan_21.md)
 - [WAN 2.2](provisioning/hf_wan_22.md)
 - [Z-image turbo](provisioning/hf_z_image_turbo.md)
+- [LTX 2.3](provisioning/hf_LTX23.md)

@@ -142,18 +142,26 @@ download_HF() {
 if [[ "$HAS_CUDA" -eq 1 ]]; then  
    echo "📥 Provisioning models"
    
-   # Huggingface download file to specified directory
+   # Huggingface download file to specified local directory
     for i in $(seq 1 20); do
         VAR1="HF_MODEL${i}"
         VAR2="HF_MODEL_FILENAME${i}"
-        DIR_VAR="HF_MODEL_DIR${i}"
+        DIR_VAR="HF_MODEL_LOCAL_DIR${i}"
         download_HF "${VAR1}" "${VAR2}" "${!DIR_VAR}"
     done
 	
-    # Huggingface download full model to specified directory
+    # Huggingface download dir to specified local directory
+    for i in $(seq 1 20); do
+        VAR1="HF_MODEL${i}"
+        VAR2="HF_MODEL_DIR${i}"
+        DIR_VAR="HF_MODEL_LOCAL_DIR${i}"
+        download_HF "${VAR1}" "${VAR2}" "${!DIR_VAR}"
+    done
+	
+    # Huggingface download full model to specified local directory
     for i in $(seq 1 20); do
         VAR1="HF_FULL_MODEL${i}"
-        DIR_VAR="HF_MODEL_DIR${i}"
+        DIR_VAR="HF_MODEL_LOCAL_DIR${i}"
         download_HF "${VAR1}" "" "${!DIR_VAR}"
     done  
 
