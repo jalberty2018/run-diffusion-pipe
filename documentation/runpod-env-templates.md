@@ -24,9 +24,9 @@ HF_MODEL_LOCAL_DIR1=ckpt_path
 HF_TOKEN="{{ RUNPOD_SECRET_HF_TOKEN_WRITE }}"
 PASSWORD="{{ RUNPOD_SECRET_CODE-SERVER-NEW }}"
 HF_MODEL1=DreamFast/gemma-3-12b-it-heretic-v2
-HF_MODEL_FILENAME1=comfyui/gemma-3-12b-it-heretic-v2_fp8_e4m3fn.safetensors
+HF_MODEL_NAME1=comfyui/gemma-3-12b-it-heretic-v2_fp8_e4m3fn.safetensors
 HF_MODEL_LOCAL_DIR1=ltx23
 HF_MODEL2=Lightricks/LTX-2.3
-HF_MODEL_FILENAME2=ltx-2.3-22b-dev.safetensors
+HF_MODEL_NAME2=ltx-2.3-22b-dev.safetensors
 HF_MODEL_LOCAL_DIR2=ltx23
 ```

@@ -12,13 +12,17 @@
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
 
-## Training WAN High/Low lora on RunPod
-
-![High Low noise training](images/runpod.jpg)
-
 ## Tensorboard
 
 ![Tensorboard ](images/tensorboard.jpg)
+
+## Training WAN 2.2 Lora on RunPod RTX A5000
+
+![High Low noise training](images/runpod.jpg)
+
+## Training LTX 2.3 Lora on Runpod L40S
+
+![Training LTX 2.3](images/runpod_LTX_L40S.jpg)
 
 ## 📚 Documentation
 

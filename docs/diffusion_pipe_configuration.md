@@ -12,8 +12,7 @@
 
 | Type  | Model     | Safetensors/Directory |  /workspace/models/<Directory> |
 |-------|-----------|------------------|---------------------------------|  
-| File  | `HF_MODEL[1-20]`  | `HF_MODEL_FILENAME[1-20]`   | `HF_MODEL_LOCAL_DIR[1-20]` |
-| Dir  | `HF_MODEL[1-20]`  | `HF_MODEL_DIR[1-20]`   | `HF_MODEL_LOCAL_DIR[1-20]` |
+| Partial  | `HF_MODEL[1-20]`  | `HF_MODEL_NAME[1-20]`   | `HF_MODEL_LOCAL_DIR[1-20]` |
 | Full   | `HF_FULL_MODEL[1-20]`  |   | `HF_MODEL_LOCAL_DIR[1-20]` |
 
 ## Connection options 

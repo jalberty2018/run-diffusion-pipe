@@ -3,7 +3,6 @@
 ## WAN 2.1 and others
 
 ```bash
-cd diffusion-pipe
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 
@@ -12,7 +11,6 @@ deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /
 ```bash
 pip uninstall diffusers
 pip install git+https://github.com/huggingface/diffusers
-cd diffusion-pipe
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config.toml
 ```
 
@@ -20,8 +18,13 @@ deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /
 
 ```bash 
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_low.toml
-
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x/config_high.toml
+```
+
+## LTX 2.3
+
+```bash 
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/LTX23_config.toml
 ```
 
 ## Resume training (--resume_from_checkpoint)

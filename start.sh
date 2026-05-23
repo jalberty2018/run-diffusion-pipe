@@ -145,15 +145,7 @@ if [[ "$HAS_CUDA" -eq 1 ]]; then
    # Huggingface download file to specified local directory
     for i in $(seq 1 20); do
         VAR1="HF_MODEL${i}"
-        VAR2="HF_MODEL_FILENAME${i}"
-        DIR_VAR="HF_MODEL_LOCAL_DIR${i}"
-        download_HF "${VAR1}" "${VAR2}" "${!DIR_VAR}"
-    done
-	
-    # Huggingface download dir to specified local directory
-    for i in $(seq 1 20); do
-        VAR1="HF_MODEL${i}"
-        VAR2="HF_MODEL_DIR${i}"
+        VAR2="HF_MODEL_NAME${i}"
         DIR_VAR="HF_MODEL_LOCAL_DIR${i}"
         download_HF "${VAR1}" "${VAR2}" "${!DIR_VAR}"
     done
