@@ -24,7 +24,9 @@ See below for options.
 
 ![Training LTX 2.3](images/runpod_LTX_L40S.jpg)
 
-## Training ZIB Lora on Runpod RTX 4090
+## Training ZIB Lora on Runpod RTX 5090 (RTX 4090 has better price/prestation)
+
+![Training ZIB](images/runpod_ZIB_RTX5090.jpg)
 
 ## 📚 Documentation
 
