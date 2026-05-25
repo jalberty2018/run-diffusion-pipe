@@ -10,10 +10,10 @@
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
 
-## Hardware provisioning
+## Hardware Requirements
 
-- GPU RTX A5000 , RTX 4090
-- Pod volume: 60Gb / 80 Gb (depending on your dataset and model size)
+- GPU RTX A5000, RTX 4090, L40S, RTX 6000 Ada
+- Pod volume: 15Gb / 80 Gb (depending on your dataset and model size)
 
 ## Image setup
 
@@ -57,7 +57,7 @@ See below for options.
 
 | Type  | Model     | Safetensors |  /workspace/models/<Directory> |
 |-------|-----------|------------------|---------------------------------|  
-| File  | `HF_MODEL[1-20]`  | `HF_MODEL_FILENAME[1-20]`   | `HF_MODEL_DIR[1-20]` |
+| File  | `HF_MODEL[1-20]`  | `HF_MODEL_NAME[1-20]`   | `HF_MODEL_DIR[1-20]` |
 | Dir   | `HF_FULL_MODEL[1-20]`  |   | `HF_MODEL_DIR[1-20]` |
 
 ## Connection options 

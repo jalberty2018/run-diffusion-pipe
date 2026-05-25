@@ -24,6 +24,8 @@ See below for options.
 
 ![Training LTX 2.3](images/runpod_LTX_L40S.jpg)
 
+## Training ZIB Lora on Runpod RTX 4090
+
 ## 📚 Documentation
 
 - [📚 Resources](docs/diffusion_pipe_resources.md)
@@ -42,7 +44,6 @@ See below for options.
 
 ## Building the Docker Image 
 
-This is not possible on [runpod.io](https://runpod.io?ref=se4tkc5o) use local hardware.
 You can build and push the image to Docker Hub using the `build-docker.py` script.
 
 ### `build-docker.py` script options

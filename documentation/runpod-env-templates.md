@@ -30,3 +30,19 @@ HF_MODEL2=Lightricks/LTX-2.3
 HF_MODEL_NAME2=ltx-2.3-22b-dev.safetensors
 HF_MODEL_LOCAL_DIR2=ltx23
 ```
+
+## Z-image Base
+
+```bash
+HF_TOKEN="{{ RUNPOD_SECRET_HF_TOKEN_WRITE }}"
+PASSWORD="{{ RUNPOD_SECRET_CODE-SERVER-NEW }}"
+HF_MODEL1=Comfy-Org/z_image
+HF_MODEL_NAME1=split_files/diffusion_models/z_image_bf16.safetensors
+HF_MODEL_LOCAL_DIR1=zib
+HF_MODEL2=chinmankokumin/Qwen3-4B-abliterated-v2
+HF_MODEL_NAME2=qwen_3_4b_abliterated_v2.safetensors
+HF_MODEL_LOCAL_DIR2=zib
+HF_MODEL3=Comfy-Org/z_image
+HF_MODEL_NAME3=split_files/vae/ae.safetensors
+HF_MODEL_LOCAL_DIR3=zib
+```
