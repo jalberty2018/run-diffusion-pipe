@@ -12,7 +12,8 @@
 - [Omnigen2](config_examples/omnigen2_config.toml)
 - [Qwen-image-24gb](config_examples/qwen-image_24gb_config.toml)
 - [Qwen-image-edit-24gb](config_examples/qwen-image-edit_24gb_config.toml)
-- [Z-image turbo](config_examples/z_image_turbo_config.toml)
+- [Z-image Base](config_examples/z_image_base_config.toml)
+- [LTX 2.3](config_examples/LTX23_config.toml) 
 
 ## Example dataset
 
