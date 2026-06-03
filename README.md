@@ -28,6 +28,10 @@ See below for options.
 
 ![Training ZIB](images/runpod_ZIB_RTX5090.jpg)
 
+## Training FLUX-KLEIN-9B context Lora on Runpod RTX 4090
+
+![Training FLUX](images/runpod_FLUX_KLEIN_RTX4090.jpg)
+
 ## 📚 Documentation
 
 - [📚 Resources](docs/diffusion_pipe_resources.md)
