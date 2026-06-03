@@ -46,3 +46,19 @@ HF_MODEL3=Comfy-Org/z_image
 HF_MODEL_NAME3=split_files/vae/ae.safetensors
 HF_MODEL_LOCAL_DIR3=zib
 ```
+
+## Flux-Klein 9B
+
+```bash
+HF_TOKEN="{{ RUNPOD_SECRET_HF_TOKEN_WRITE }}"
+PASSWORD="{{ RUNPOD_SECRET_CODE-SERVER-NEW }}"
+HF_MODEL1=black-forest-labs/FLUX.2-klein-base-9B
+HF_MODEL_NAME1=flux-2-klein-base-9b.safetensors
+HF_MODEL_LOCAL_DIR1=flux
+HF_MODEL2=LS110824/text_encoders
+HF_MODEL_NAME2=qwen_3_8b.safetensors
+HF_MODEL_LOCAL_DIR2=flux
+HF_MODEL3=Comfy-Org/vae-text-encorder-for-flux-klein-9b
+HF_MODEL_NAME3=split_files/vae/flux2-vae.safetensors
+HF_MODEL_LOCAL_DIR3=flux
+```

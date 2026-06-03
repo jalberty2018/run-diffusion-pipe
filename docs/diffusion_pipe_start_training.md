@@ -25,6 +25,12 @@ deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/ZIB_config.toml
 ```
 
+## FLUX-Klein 9B
+
+```bash 
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/FLUX_config.toml
+```
+
 ## Qwen Image 
 
 ```bash

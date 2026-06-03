@@ -9,3 +9,4 @@
 - [WAN 2.2](provisioning/hf_wan_22.md)
 - [Z-image base](provisioning/hf_z_image_base.md)
 - [LTX 2.3](provisioning/hf_LTX23.md)
+- [Flux-klein-9B](provisioning/hf_flux_klein_9B_base.md)

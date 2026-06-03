@@ -15,7 +15,9 @@
 ### Add directory to encrypted archive
 
 ```bash
-7z a -p -mhe=on output-training.7z /workspace/output/
+7z a -p -mhe=on /workspace/output-training.7z /workspace/output/
+7z a -p -mhe=on -v800m /workspace/output-image-x.7z /workspace/output/
+
 ```
 
 ### Extract directory from archive
