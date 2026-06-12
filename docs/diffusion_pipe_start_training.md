@@ -8,20 +8,20 @@ deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /
 
 ## WAN 2.2
 
-```bash 
+```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/config_low.toml
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/config_high.toml
 ```
 
 ## LTX 2.3
 
-```bash 
+```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/LTX23_config.toml
 ```
 
 ## ZIB
 
-```bash 
+```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/ZIB_config.toml
 ```
 
@@ -31,7 +31,7 @@ deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/FLUX_config.toml
 ```
 
-## Qwen Image 
+## Qwen Image
 
 ```bash
 pip uninstall diffusers
