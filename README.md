@@ -4,10 +4,10 @@
 
 ## Synopsis
 
-- Models are automatically downloaded based on the specified paths in the environment configuration.  
-- Authentication credentials can be set via secrets for:  
-  - **Code server** authentication (not possible to switch off) 
-  - **Hugging Face** token for model access.  
+- Models are automatically downloaded based on the specified paths in the environment configuration.
+- Authentication credentials can be set via secrets for:
+  - **Code server** authentication (not possible to switch off)
+  - **Hugging Face** token for model access.
 
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
@@ -32,15 +32,15 @@ See below for options.
 
 ![Training FLUX](images/runpod_FLUX_KLEIN_RTX4090.jpg)
 
-## 📚 Documentation
+## Documentation
 
-- [📚 Resources](docs/diffusion_pipe_resources.md)
-- [📦 Model provisioning](docs/diffusion_pipe_provisioning.md)
-- [🧩 Config examples](docs/diffusion_pipe_config_examples.md)
-- [⚙️ Start training](docs/diffusion_pipe_start_training.md)
-- [💻 Hardware Requirements](docs/diffusion_pipe_hardware.md)
-- [⚙️ Image setup](docs/diffusion_pipe_image_setup.md)
-- [⚙️ Environment variables](docs/diffusion_pipe_configuration.md)
+- [Resources](docs/diffusion_pipe_resources.md)
+- [Model provisioning](docs/diffusion_pipe_provisioning.md)
+- [Config examples](docs/diffusion_pipe_config_examples.md)
+- [Start training](docs/diffusion_pipe_start_training.md)
+- [Hardware Requirements](docs/diffusion_pipe_hardware.md)
+- [Image setup](docs/diffusion_pipe_image_setup.md)
+- [Environment variables](docs/diffusion_pipe_configuration.md)
 
 ## Setup
 
@@ -48,11 +48,11 @@ See below for options.
 
 - Image: ls250824/run-diffusion-pipe:<[![Docker Image Version](https://img.shields.io/docker/v/ls250824/run-diffusion-pipe)](https://hub.docker.com/r/ls250824/run-diffusion-pipe)>
 
-## Building the Docker Image 
+## Building the Docker Image
 
-You can build and push the image to Docker Hub using the `build-docker.py` script.
+You can build and push the image to Docker Hub using the `build_docker.py` script.
 
-### `build-docker.py` script options
+### `build_docker.py` script options
 
 | Option         | Description                                         | Default                |
 |----------------|-----------------------------------------------------|------------------------|
@@ -60,7 +60,7 @@ You can build and push the image to Docker Hub using the `build-docker.py` scrip
 | `--tag`        | Tag to use for the image                            | Today's date           |
 | `--latest`     | If specified, also tags and pushes as `latest`      | Not enabled by default |
 
-### Build & push Command
+### Build & Push Command
 
 Run the following command to clone the repository and build the image:
 
@@ -71,10 +71,10 @@ mv ./run-diffusion-pipe/build_docker.py ..
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
-python build-docker.py \
+python build_docker.py \
 --username=<your_dockerhub_username> \
---tag=<custom_tag> \ 
+--tag=<custom_tag> \
 run-diffusion-pipe
 ```
 
-Note: If you want to push the image with the latest tag, add the --latest flag at the end.
+Note: If you want to push the image with the `latest` tag, add the `--latest` flag at the end.

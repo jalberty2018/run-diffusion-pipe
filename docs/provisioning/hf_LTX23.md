@@ -23,6 +23,6 @@ hf download SulphurAI/Sulphur-2-base sulphur_dev_bf16.safetensors \
 ## [Gemma-3-12b-it-heretic-v2](https://huggingface.co/DreamFast/gemma-3-12b-it-heretic-v2)
 
 ```bash
-hf download DreamFast/gemma-3-12b-it-heretic-v2 comfyui/gemma-3-12b-it-heretic-v2_fp8_e4m3fn.safetensors  \
+hf download DreamFast/gemma-3-12b-it-heretic-v2 comfyui/gemma-3-12b-it-heretic-v2_fp8_e4m3fn.safetensors \
 --local-dir /workspace/models/ltx23
 ```

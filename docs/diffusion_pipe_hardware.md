@@ -4,7 +4,7 @@
 
 | Model | GPU | Container Disk | Volume Disk |
 |--------------|------------|------------|------------------|
-| WAN 2.2     | RTX A5000 (24 Gb) | 15 Gb |   125 Gb   |
-| LTX 2.3   | L40S (48 Gb) | 15 Gb | 100 Gb  |
-| ZIB   | RTX 4090 (24 Gb) | 15 Gb | 40 Gb |
-| FLUX-Klein-9B   | RTX 4090 (24 Gb) | 15 Gb |  60 Gb |
+| WAN 2.2 | RTX A5000 (24 GB) | 15 GB | 125 GB |
+| LTX 2.3 | L40S (48 GB) | 15 GB | 100 GB |
+| ZIB | RTX 4090 (24 GB) | 15 GB | 40 GB |
+| FLUX-Klein-9B | RTX 4090 (24 GB) | 15 GB | 60 GB |
