@@ -1,4 +1,9 @@
-# Runpod templates
+# RunPod templates
+
+Use these blocks in the RunPod template environment variables.
+`HF_TOKEN` should point to a Hugging Face token secret with access to gated models.
+`PASSWORD` should point to the Code Server password secret.
+Add `PUBLIC_KEY="{{ RUNPOD_SECRET_<your-ssh-key-secret> }}"` when SSH/SCP access is required.
 
 ## WAN 2.1 t2v
 

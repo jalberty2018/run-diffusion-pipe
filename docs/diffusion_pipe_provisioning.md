@@ -1,5 +1,10 @@
 # 📦 Manual setup guide
 
+The container can provision models automatically at startup with Hugging Face environment variables.
+Files are downloaded into `/workspace/models/<target_dir>`, where `/workspace` is the persistent RunPod volume.
+
+## Manual provisioning references
+
 - [Hunyuanvideo](provisioning/hf_hunyuanvideo.md)
 - [Omnigen2](provisioning/hf_omnigen2.md)
 - [Phantom WAN](provisioning/hf_phantom.md)

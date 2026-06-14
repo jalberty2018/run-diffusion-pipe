@@ -5,9 +5,12 @@
 ## Synopsis
 
 - Models are automatically downloaded based on the specified paths in the environment configuration.
+- `/workspace` is persistent on RunPod. On first start the container moves `diffusion-pipe`, `README.md`, and `docs/` into `/workspace`.
+- Code Server starts on port `9000` and TensorBoard starts on port `6006` when CUDA is available.
 - Authentication credentials can be set via secrets for:
   - **Code server** authentication (not possible to switch off)
   - **Hugging Face** token for model access.
+  - **SSH/SCP** access when `PUBLIC_KEY` is set.
 
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
@@ -33,8 +36,8 @@ See below for options.
 | CUDA      | `12.8.1` |
 | Triton    | `3.4.0` |
 | nvcc      | `12.8.x` |
-| diffusion pipe | latest |
-| code server | latest |
+| diffusion pipe | cloned from upstream `main` during image build |
+| code server | installed from official install script during image build |
 
 ## Installed Attentions
 
@@ -60,13 +63,17 @@ See below for options.
 |--------------|----------------------|
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
+| SSH/SCP      | `PUBLIC_KEY`         |
 
 ## Huggingface model configuration
 
-| Type  | Model     | Safetensors/Directory |  /workspace/models/<Directory> | --exclude |
-|-------|-----------|------------------|---------------------------------|  
-| Partial  | `HF_MODEL[1-20]`  | `HF_MODEL_NAME[1-20]`   | `HF_MODEL_LOCAL_DIR[1-20]` |
-| Full   | `HF_FULL_MODEL[1-20]`  |   | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
+| Type | Model | File or directory inside repo | `/workspace/models/<Directory>` | Exclude patterns |
+|------|-------|--------------------------------|----------------------------------|------------------|
+| Partial | `HF_MODEL[1-20]` | `HF_MODEL_NAME[1-20]` | `HF_MODEL_LOCAL_DIR[1-20]` | |
+| Full | `HF_FULL_MODEL[1-20]` | | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
+
+Partial downloads run `hf download <repo> --local-dir /workspace/models/<dir> <file>`.
+Full downloads run `hf download <repo> --local-dir /workspace/models/<dir>`, with optional `--exclude` patterns.
 
 ## Connection options
 

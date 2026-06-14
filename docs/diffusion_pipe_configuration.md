@@ -6,14 +6,63 @@
 |--------------|----------------------|
 | Huggingface  | `HF_TOKEN`           |
 | Code Server  | `PASSWORD`           |
+| SSH/SCP      | `PUBLIC_KEY`         |
 
+`HF_TOKEN` is used by the Hugging Face CLI for gated or private repositories.
+`PASSWORD` enables password authentication for Code Server. If it is not set, Code Server generates a password in `/root/.config/code-server/config.yaml`.
+`PUBLIC_KEY` enables the SSH service and appends the key to `~/.ssh/authorized_keys`.
 
 ## Huggingface model configuration
 
-| Type  | Model     | Safetensors/Directory |  /workspace/models/<Directory> | --exclude |
-|-------|-----------|------------------|---------------------------------|  
-| Partial  | `HF_MODEL[1-20]`  | `HF_MODEL_NAME[1-20]`   | `HF_MODEL_LOCAL_DIR[1-20]` |
-| Full   | `HF_FULL_MODEL[1-20]`  |   | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
+| Type | Model | File or directory inside repo | `/workspace/models/<Directory>` | Exclude patterns |
+|------|-------|--------------------------------|----------------------------------|------------------|
+| Partial | `HF_MODEL[1-20]` | `HF_MODEL_NAME[1-20]` | `HF_MODEL_LOCAL_DIR[1-20]` | |
+| Full | `HF_FULL_MODEL[1-20]` | | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
+
+Use matching numbers for each download. For example, `HF_MODEL1`, `HF_MODEL_NAME1`, and `HF_MODEL_LOCAL_DIR1` describe one partial download.
+
+### Partial download
+
+Downloads one file or subdirectory from a Hugging Face repository:
+
+```bash
+HF_MODEL1=Comfy-Org/z_image
+HF_MODEL_NAME1=split_files/vae/ae.safetensors
+HF_MODEL_LOCAL_DIR1=zib
+```
+
+Result:
+
+```text
+/workspace/models/zib/ae.safetensors
+```
+
+### Full repository download
+
+Downloads the complete repository into the target directory:
+
+```bash
+HF_FULL_MODEL1=Wan-AI/Wan2.2-T2V-A14B
+HF_FULL_MODEL_LOCAL_DIR1=wan/ckpt_path
+```
+
+Result:
+
+```text
+/workspace/models/wan/ckpt_path/
+```
+
+### Full repository download with excludes
+
+Use `HF_FULL_MODEL_EXCLUDE#` to skip files or directories. Separate multiple patterns with spaces:
+
+```bash
+HF_FULL_MODEL1=Wan-AI/Wan2.2-T2V-A14B
+HF_FULL_MODEL_LOCAL_DIR1=wan/ckpt_path
+HF_FULL_MODEL_EXCLUDE1="models_t5* */diffusion_pytorch_model*"
+```
+
+The startup script checks indexes `1` through `20` for both partial and full downloads.
 
 ## Connection options
 

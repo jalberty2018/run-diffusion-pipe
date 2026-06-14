@@ -3,6 +3,12 @@
 echo "ℹ️ Pod run-diffusion-pipe started"
 echo "ℹ️ Wait until the message 🎉 Provisioning done, ready to train AI content 🎉. is displayed"
 
+# Keep Hugging Face downloads readable in RunPod logs.
+export HF_HUB_DISABLE_TELEMETRY=1
+export HF_HUB_DISABLE_PROGRESS_BARS=1
+export NO_COLOR=1
+export CLICOLOR=0
+
 # Enable SSH if PUBLIC_KEY is set
 if [[ -n "$PUBLIC_KEY" ]]; then
     mkdir -p ~/.ssh && chmod 700 ~/.ssh
@@ -118,6 +124,11 @@ download_HF() {
     local model="${!model_var}"
     [[ -z "$model" ]] && return 0
 
+    if [[ -z "$dest_dir" ]]; then
+        echo "⚠️ [$model_var] Skipping download: target directory is empty"
+        return 0
+    fi
+
     local file=""
     [[ -n "$file_var" ]] && file="${!file_var}"
 
@@ -151,7 +162,27 @@ if [[ "$HAS_CUDA" -eq 1 ]]; then
         VAR1="HF_MODEL${i}"
         VAR2="HF_MODEL_NAME${i}"
         DIR_VAR="HF_MODEL_LOCAL_DIR${i}"
-        download_HF "${VAR1}" "${VAR2}" "${!DIR_VAR}"
+        MODEL="${!VAR1}"
+        FILE="${!VAR2}"
+        DEST_DIR="${!DIR_VAR}"
+
+        if [[ -z "$MODEL" ]]; then
+            if [[ -n "$FILE" || -n "$DEST_DIR" ]]; then
+                echo "⚠️ [HF_MODEL${i}] Skipping partial download: ${VAR1} is not set"
+            fi
+            continue
+        fi
+
+        if [[ -z "$DEST_DIR" ]]; then
+            echo "⚠️ [HF_MODEL${i}] Skipping partial download: ${DIR_VAR} is not set"
+            continue
+        fi
+
+        if [[ -z "$FILE" ]]; then
+            echo "⚠️ [HF_MODEL${i}] ${VAR2} is not set, downloading full repository from ${VAR1}"
+        fi
+
+        download_HF "${VAR1}" "${VAR2}" "$DEST_DIR"
     done
 	
     # Huggingface download full model with possible exclude to specified local directory	
@@ -159,8 +190,27 @@ if [[ "$HAS_CUDA" -eq 1 ]]; then
         VAR1="HF_FULL_MODEL${i}"
         DIR_VAR="HF_FULL_MODEL_LOCAL_DIR${i}"
         EXCLUDE_VAR="HF_FULL_MODEL_EXCLUDE${i}"
+        MODEL="${!VAR1}"
+        DEST_DIR="${!DIR_VAR}"
+        EXCLUDE="${!EXCLUDE_VAR}"
 
-        download_HF "${VAR1}" "" "${!DIR_VAR}" "${EXCLUDE_VAR}"
+        if [[ -z "$MODEL" ]]; then
+            if [[ -n "$DEST_DIR" || -n "$EXCLUDE" ]]; then
+                echo "⚠️ [HF_FULL_MODEL${i}] Skipping full download: ${VAR1} is not set"
+            fi
+            continue
+        fi
+
+        if [[ -z "$DEST_DIR" ]]; then
+            echo "⚠️ [HF_FULL_MODEL${i}] Skipping full download: ${DIR_VAR} is not set"
+            continue
+        fi
+
+        if [[ -n "$EXCLUDE" ]]; then
+            echo "ℹ️ [HF_FULL_MODEL${i}] Using exclude patterns from ${EXCLUDE_VAR}: ${EXCLUDE}"
+        fi
+
+        download_HF "${VAR1}" "" "$DEST_DIR" "${EXCLUDE_VAR}"
     done
 
    HAS_PROVISIONING=1
