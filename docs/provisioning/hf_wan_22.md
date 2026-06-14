@@ -13,3 +13,4 @@ hf download Wan-AI/Wan2.2-T2V-A14B --local-dir /workspace/models/ckpt_path/
 ```bash
 hf download Wan-AI/Wan2.2-I2V-A14B --local-dir /workspace/models/ckpt_path/
 ```
+

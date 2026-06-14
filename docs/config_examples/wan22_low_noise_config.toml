@@ -79,8 +79,9 @@ video_clip_mode = 'single_beginning'
 
 [model]
 type = 'wan'
-ckpt_path = '/workspace/models/ckpt_path/'
-transformer_path = '/workspace/models/ckpt_path/low_noise_model'
+ckpt_path = '/workspace/models/wan/ckpt_path'
+transformer_path = '/workspace/models/wan/transformer_path/split_files/diffusion_models/wan2.2_t2v_low_noise_14B_fp16.safetensors'
+llm_path = '/workspace/models/wan/llm_path/split_files/text_encoders/umt5_xxl_fp16.safetensors'
 dtype = 'bfloat16'
 transformer_dtype = 'float8'
 min_t = 0

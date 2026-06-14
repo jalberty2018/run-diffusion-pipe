@@ -107,35 +107,39 @@ fi
 	
 # Create workspace directories if they don’t exist
 mkdir -p /workspace/output
+mkdir -p /workspace/models
 
 download_HF() {
     local model_var="$1"
     local file_var="$2"
     local dest_dir="$3"
+    local exclude_var="$4"
 
     local model="${!model_var}"
     [[ -z "$model" ]] && return 0
 
     local file=""
-    if [[ -n "$file_var" ]]; then
-        file="${!file_var}"
-    fi
+    [[ -n "$file_var" ]] && file="${!file_var}"
+
+    local exclude=""
+    [[ -n "$exclude_var" ]] && exclude="${!exclude_var}"
 
     local target="/workspace/models/$dest_dir"
     mkdir -p "$target"
 
-    if [[ -n "$file" ]]; then
-        echo "ℹ️ [DOWNLOAD] Fetching $model/$file → $target"
-        hf download "$model" "$file" --local-dir "$target" || \
-            echo "⚠️ Failed to download $model/$file"
-    else
-        echo "ℹ️ [DOWNLOAD] Fetching $model → $target"
-        hf download "$model" --local-dir "$target" || \
-            echo "⚠️ Failed to download $model"
+    local cmd=(hf download "$model" --local-dir "$target")
+
+    [[ -n "$file" ]] && cmd+=("$file")
+
+    if [[ -n "$exclude" ]]; then
+        read -ra EXCLUDES <<< "$exclude"
+        cmd+=(--exclude "${EXCLUDES[@]}")
     fi
 
+    echo "ℹ️ [DOWNLOAD] ${cmd[*]}"
+    "${cmd[@]}" || echo "⚠️ Failed to download $model"
+
     sleep 1
-    return 0
 }
 
 # Provisioning if running on GPU with CUDA
@@ -150,12 +154,14 @@ if [[ "$HAS_CUDA" -eq 1 ]]; then
         download_HF "${VAR1}" "${VAR2}" "${!DIR_VAR}"
     done
 	
-    # Huggingface download full model to specified local directory
-    for i in $(seq 1 20); do
+    # Huggingface download full model with possible exclude to specified local directory	
+	for i in $(seq 1 20); do
         VAR1="HF_FULL_MODEL${i}"
-        DIR_VAR="HF_MODEL_LOCAL_DIR${i}"
-        download_HF "${VAR1}" "" "${!DIR_VAR}"
-    done  
+        DIR_VAR="HF_FULL_MODEL_LOCAL_DIR${i}"
+        EXCLUDE_VAR="HF_FULL_MODEL_EXCLUDE${i}"
+
+        download_HF "${VAR1}" "" "${!DIR_VAR}" "${EXCLUDE_VAR}"
+    done
 
    HAS_PROVISIONING=1
 else

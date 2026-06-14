@@ -18,7 +18,7 @@ See below for options.
 
 | Model | GPU | Container Disk | Volume Disk |
 |--------------|------------|------------|------------------|
-| WAN 2.2     | RTX A5000 (24 Gb) | 15 Gb |   125 Gb   |
+| WAN 2.2     | RTX A5000 (24 Gb) | 15 Gb |   80 Gb   |
 | LTX 2.3   | L40S (48 Gb) | 15 Gb | 100 Gb  |
 | ZIB   | RTX 4090 (24 Gb) | 15 Gb | 40 Gb |
 | FLUX-Klein-9B   | RTX 4090 (24 Gb) | 15 Gb |  60 Gb |
@@ -63,10 +63,10 @@ See below for options.
 
 ## Huggingface model configuration
 
-| Type  | Model     | Safetensors |  /workspace/models/<Directory> |
+| Type  | Model     | Safetensors/Directory |  /workspace/models/<Directory> | --exclude |
 |-------|-----------|------------------|---------------------------------|  
-| File  | `HF_MODEL[1-20]`  | `HF_MODEL_NAME[1-20]`   | `HF_MODEL_DIR[1-20]` |
-| Dir   | `HF_FULL_MODEL[1-20]`  |   | `HF_MODEL_DIR[1-20]` |
+| Partial  | `HF_MODEL[1-20]`  | `HF_MODEL_NAME[1-20]`   | `HF_MODEL_LOCAL_DIR[1-20]` |
+| Full   | `HF_FULL_MODEL[1-20]`  |   | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
 
 ## Connection options 
 

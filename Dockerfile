@@ -75,6 +75,10 @@ LABEL org.opencontainers.image.title="Diffusion-Pipe" \
       org.opencontainers.image.licenses="MIT"
 
 # Test
+# Check
+# Update Hugging Face CLI and verify the hf command is available
+RUN hf update && hf version
+
 RUN python -c "import torch, torchvision, torchaudio, triton; \
 print(f'Torch: {torch.__version__}\\nTorchvision: {torchvision.__version__}\\nTorchaudio: {torchaudio.__version__}\\nTriton: {triton.__version__}\\nCUDA available: {torch.cuda.is_available()}\\nCUDA version: {torch.version.cuda}')"
 
