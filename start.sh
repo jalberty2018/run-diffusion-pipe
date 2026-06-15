@@ -3,11 +3,13 @@
 echo "ℹ️ Pod run-diffusion-pipe started"
 echo "ℹ️ Wait until the message 🎉 Provisioning done, ready to train AI content 🎉. is displayed"
 
-# Keep Hugging Face downloads readable in RunPod logs.
-export HF_HUB_DISABLE_TELEMETRY=1
-export HF_HUB_DISABLE_PROGRESS_BARS=1
+# Hugging Face CLI output tuned for RunPod plain logs.
 export NO_COLOR=1
-export CLICOLOR=0
+export HF_HUB_VERBOSITY=warning
+export HF_HUB_DISABLE_PROGRESS_BARS=1
+export HF_HUB_DISABLE_TELEMETRY=1
+export DO_NOT_TRACK=1
+export HF_HUB_DISABLE_UPDATE_CHECK=1
 
 # Enable SSH if PUBLIC_KEY is set
 if [[ -n "$PUBLIC_KEY" ]]; then
@@ -120,6 +122,7 @@ download_HF() {
     local file_var="$2"
     local dest_dir="$3"
     local exclude_var="$4"
+    local include_var="$5"
 
     local model="${!model_var}"
     [[ -z "$model" ]] && return 0
@@ -135,12 +138,20 @@ download_HF() {
     local exclude=""
     [[ -n "$exclude_var" ]] && exclude="${!exclude_var}"
 
+    local include=""
+    [[ -n "$include_var" ]] && include="${!include_var}"
+
     local target="/workspace/models/$dest_dir"
     mkdir -p "$target"
 
     local cmd=(hf download "$model" --local-dir "$target")
 
     [[ -n "$file" ]] && cmd+=("$file")
+
+    if [[ -n "$include" ]]; then
+        read -ra INCLUDES <<< "$include"
+        cmd+=(--include "${INCLUDES[@]}")
+    fi
 
     if [[ -n "$exclude" ]]; then
         read -ra EXCLUDES <<< "$exclude"
@@ -185,17 +196,19 @@ if [[ "$HAS_CUDA" -eq 1 ]]; then
         download_HF "${VAR1}" "${VAR2}" "$DEST_DIR"
     done
 	
-    # Huggingface download full model with possible exclude to specified local directory	
+    # Huggingface download full model with possible include/exclude to specified local directory	
 	for i in $(seq 1 20); do
         VAR1="HF_FULL_MODEL${i}"
         DIR_VAR="HF_FULL_MODEL_LOCAL_DIR${i}"
         EXCLUDE_VAR="HF_FULL_MODEL_EXCLUDE${i}"
+        INCLUDE_VAR="HF_FULL_MODEL_INCLUDE${i}"
         MODEL="${!VAR1}"
         DEST_DIR="${!DIR_VAR}"
         EXCLUDE="${!EXCLUDE_VAR}"
+        INCLUDE="${!INCLUDE_VAR}"
 
         if [[ -z "$MODEL" ]]; then
-            if [[ -n "$DEST_DIR" || -n "$EXCLUDE" ]]; then
+            if [[ -n "$DEST_DIR" || -n "$EXCLUDE" || -n "$INCLUDE" ]]; then
                 echo "⚠️ [HF_FULL_MODEL${i}] Skipping full download: ${VAR1} is not set"
             fi
             continue
@@ -206,11 +219,15 @@ if [[ "$HAS_CUDA" -eq 1 ]]; then
             continue
         fi
 
+        if [[ -n "$INCLUDE" ]]; then
+            echo "ℹ️ [HF_FULL_MODEL${i}] Using include patterns from ${INCLUDE_VAR}: ${INCLUDE}"
+        fi
+
         if [[ -n "$EXCLUDE" ]]; then
             echo "ℹ️ [HF_FULL_MODEL${i}] Using exclude patterns from ${EXCLUDE_VAR}: ${EXCLUDE}"
         fi
 
-        download_HF "${VAR1}" "" "$DEST_DIR" "${EXCLUDE_VAR}"
+        download_HF "${VAR1}" "" "$DEST_DIR" "${EXCLUDE_VAR}" "${INCLUDE_VAR}"
     done
 
    HAS_PROVISIONING=1

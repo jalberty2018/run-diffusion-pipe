@@ -14,10 +14,10 @@
 
 ## Huggingface model configuration
 
-| Type | Model | File or directory inside repo | `/workspace/models/<Directory>` | Exclude patterns |
-|------|-------|--------------------------------|----------------------------------|------------------|
-| Partial | `HF_MODEL[1-20]` | `HF_MODEL_NAME[1-20]` | `HF_MODEL_LOCAL_DIR[1-20]` | |
-| Full | `HF_FULL_MODEL[1-20]` | | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
+| Type | Model | File or directory inside repo | `/workspace/models/<Directory>` | Include patterns | Exclude patterns |
+|------|-------|--------------------------------|----------------------------------|------------------|------------------|
+| Partial | `HF_MODEL[1-20]` | `HF_MODEL_NAME[1-20]` | `HF_MODEL_LOCAL_DIR[1-20]` | | |
+| Full | `HF_FULL_MODEL[1-20]` | | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_INCLUDE[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
 
 Use matching numbers for each download. For example, `HF_MODEL1`, `HF_MODEL_NAME1`, and `HF_MODEL_LOCAL_DIR1` describe one partial download.
 
@@ -61,6 +61,18 @@ HF_FULL_MODEL1=Wan-AI/Wan2.2-T2V-A14B
 HF_FULL_MODEL_LOCAL_DIR1=wan/ckpt_path
 HF_FULL_MODEL_EXCLUDE1="models_t5* */diffusion_pytorch_model*"
 ```
+
+### Full repository download with includes
+
+Use `HF_FULL_MODEL_INCLUDE#` to download only matching files or directories. Separate multiple patterns with spaces:
+
+```bash
+HF_FULL_MODEL1=Wan-AI/Wan2.2-T2V-A14B
+HF_FULL_MODEL_LOCAL_DIR1=wan/ckpt_path
+HF_FULL_MODEL_INCLUDE1="vae/* scheduler/*"
+```
+
+`HF_FULL_MODEL_INCLUDE#` and `HF_FULL_MODEL_EXCLUDE#` can be combined for the same numbered full download.
 
 The startup script checks indexes `1` through `20` for both partial and full downloads.
 
