@@ -6,7 +6,6 @@ echo "ℹ️ Wait until the message 🎉 Provisioning done, ready to train AI co
 # Hugging Face CLI output tuned for RunPod plain logs.
 export NO_COLOR=1
 export HF_HUB_VERBOSITY=warning
-export HF_HUB_DISABLE_PROGRESS_BARS=1
 export HF_HUB_DISABLE_TELEMETRY=1
 export DO_NOT_TRACK=1
 export HF_HUB_DISABLE_UPDATE_CHECK=1
@@ -117,6 +116,27 @@ fi
 mkdir -p /workspace/output
 mkdir -p /workspace/models
 
+run_hf_download() {
+    local timeout_value="${HF_DOWNLOAD_TIMEOUT:-10m}"
+    local hf_command
+
+    echo "ℹ️ [DOWNLOAD] Timeout: $timeout_value"
+
+    # hf suppresses progress when stdout is a pipe. Run it in a pseudo-terminal
+    # and then convert its terminal progress into compact RunPod log lines.
+    printf -v hf_command '%q ' hf download "$@"
+
+    timeout --foreground --signal=TERM --kill-after=30s "$timeout_value" \
+        script --quiet --return --flush --command "$hf_command" /dev/null 2>&1 \
+        | stdbuf -oL tr '\r' '\n' \
+        | sed -u -E \
+            -e '/^[[:space:]]*$/d' \
+            -e $'s/\033\\[[0-9;?]*[ -\\/]*[@-~]//g' \
+            -e 's/^([^:]+):[[:space:]]*([0-9]+)%\|[^|]*\|[[:space:]]*([^[:space:]]+).*/Downloading \1 \2% \3/'
+
+    return "${PIPESTATUS[0]}"
+}
+
 download_HF() {
     local model_var="$1"
     local file_var="$2"
@@ -159,7 +179,7 @@ download_HF() {
     fi
 
     echo "ℹ️ [DOWNLOAD] ${cmd[*]}"
-    "${cmd[@]}" || echo "⚠️ Failed to download $model"
+    run_hf_download "${cmd[@]:2}" || echo "⚠️ Failed to download $model"
 
     sleep 1
 }

@@ -75,6 +75,7 @@ HF_FULL_MODEL_INCLUDE1="vae/* scheduler/*"
 `HF_FULL_MODEL_INCLUDE#` and `HF_FULL_MODEL_EXCLUDE#` can be combined for the same numbered full download.
 
 The startup script checks indexes `1` through `20` for both partial and full downloads.
+Set `HF_DOWNLOAD_TIMEOUT` to change the timeout per Hugging Face download. The default is `10m`; values use the GNU `timeout` format, such as `30m` or `2h`.
 
 ## Connection options
 

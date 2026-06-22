@@ -72,9 +72,6 @@ See below for options.
 | Partial | `HF_MODEL[1-20]` | `HF_MODEL_NAME[1-20]` | `HF_MODEL_LOCAL_DIR[1-20]` | | |
 | Full | `HF_FULL_MODEL[1-20]` | | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_INCLUDE[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
 
-Partial downloads run `hf download <repo> --local-dir /workspace/models/<dir> <file>`.
-Full downloads run `hf download <repo> --local-dir /workspace/models/<dir>`, with optional `--include` and `--exclude` patterns.
-
 ## Connection options
 
 ### Services
