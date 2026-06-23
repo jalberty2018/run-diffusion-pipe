@@ -40,6 +40,23 @@ Symlinks keep `/diffusion-pipe` and `/docs` available for commands and documenta
 7z x x.7z
 ```
 
+## Start training
+
+```bash
+deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/x_config.toml
+```
+
+## tmux
+
+| Action           | Combination                   |
+| --------------- | ----------------------- |
+| Detach          | `Ctrl+b d`              |
+| New window   | `Ctrl+b c`              |
+| Next window | `Ctrl+b n`              |
+| Previous window   | `Ctrl+b p`              |
+| List sessions   | `tmux ls`               |
+| Reconnect   | `tmux attach -t sessie` |
+
 ## Bash commands
 
 ```bash
@@ -47,7 +64,6 @@ nvtop
 htop
 ncdu
 tmux
-tmux attach
 unzip
 nvcc
 nano
