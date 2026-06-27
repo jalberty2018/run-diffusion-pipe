@@ -35,6 +35,10 @@ See below for options.
 
 ![Training FLUX](images/runpod_FLUX_KLEIN_RTX4090.jpg)
 
+## Training Krea-2 Lora on RunPod RTX 4090
+
+![Training FLUX](images/runpod_krea2_RTX4090.jpg)
+
 ## Documentation
 
 - [Resources](docs/diffusion_pipe_resources.md)
