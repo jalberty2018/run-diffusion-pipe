@@ -18,7 +18,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
       ./sageattention-2.2.0-cp311-cp311-linux_x86_64.whl && \
     rm -f flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl \
           sageattention-2.2.0-cp311-cp311-linux_x86_64.whl
-		  
+
+# Install code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh           
+
 # Clone latest default branch HEAD of diffusion pipe
 RUN --mount=type=cache,target=/root/.cache/git \
     git clone --recurse-submodules --depth 1 https://github.com/tdrussell/diffusion-pipe.git
@@ -27,10 +30,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
     -r diffusion-pipe/requirements.txt
 
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh    
-
-# Python 3.11 fix
+    # Python 3.11 fix
 RUN python3 - <<'PY'
 from pathlib import Path
 

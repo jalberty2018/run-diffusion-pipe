@@ -72,6 +72,13 @@ See below for options.
 | Partial | `HF_MODEL[1-20]` | `HF_MODEL_NAME[1-20]` | `HF_MODEL_LOCAL_DIR[1-20]` | | |
 | Full | `HF_FULL_MODEL[1-20]` | | `HF_FULL_MODEL_LOCAL_DIR[1-20]` | `HF_FULL_MODEL_INCLUDE[1-20]` | `HF_FULL_MODEL_EXCLUDE[1-20]` |
 
+### Workspace move
+
+| Environment Variable | Default | Description |
+|----------------------|---------|-------------|
+| `MOVE_STATUS_INTERVAL` | `5` | Seconds between `/diffusion-pipe` to `/workspace/diffusion-pipe` progress checks. |
+| `MOVE_STALL_TIMEOUT` | `300` | Seconds without size changes before the move is treated as stalled. |
+
 ## Connection options
 
 ### Services

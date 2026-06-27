@@ -77,6 +77,15 @@ HF_FULL_MODEL_INCLUDE1="vae/* scheduler/*"
 The startup script checks indexes `1` through `20` for both partial and full downloads.
 Set `HF_DOWNLOAD_TIMEOUT` to change the timeout per Hugging Face download. The default is `10m`; values use the GNU `timeout` format, such as `30m` or `2h`.
 
+## Workspace move configuration
+
+On first pod start, `/diffusion-pipe` is copied to `/workspace/diffusion-pipe` with progress logging before the original image copy is removed.
+
+| Environment Variable | Default | Description |
+|----------------------|---------|-------------|
+| `MOVE_STATUS_INTERVAL` | `5` | Seconds between move progress checks. |
+| `MOVE_STALL_TIMEOUT` | `300` | Seconds without size changes before the move is treated as stalled. |
+
 ## Connection options
 
 ### Services

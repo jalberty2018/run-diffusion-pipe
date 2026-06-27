@@ -85,3 +85,16 @@ HF_MODEL3=Comfy-Org/vae-text-encorder-for-flux-klein-9b
 HF_MODEL_NAME3=split_files/vae/flux2-vae.safetensors
 HF_MODEL_LOCAL_DIR3=flux
 ```
+
+## Krea 2
+
+```bash
+HF_TOKEN="{{ RUNPOD_SECRET_HF_TOKEN_WRITE }}"
+PASSWORD="{{ RUNPOD_SECRET_CODE-SERVER-NEW }}"
+HF_FULL_MODEL1=Comfy-Org/Krea-2
+HF_FULL_MODEL_LOCAL_DIR1=krea2
+HF_FULL_MODEL_INCLUDE1="diffusion_models/krea2_raw_bf16.safetensors vae/qwen_image_vae.safetensors"
+HF_MODEL1=ahmed22xa/Huihui-Qwen3-VL-4B-Instruct-abliterated-comfy
+HF_MODEL_NAME1=Huihui-Qwen3-VL-4B-Instruct-abliterated.safetensors
+HF_MODEL_LOCAL_DIR1=krea2/text-encoder
+```
