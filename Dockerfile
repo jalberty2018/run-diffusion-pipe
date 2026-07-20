@@ -30,7 +30,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   python -m pip install --no-cache-dir --root-user-action ignore -c /constraints.txt \
     -r diffusion-pipe/requirements.txt
 
-    # Python 3.11 fix
+# Python 3.11 fix
 RUN python3 - <<'PY'
 from pathlib import Path
 
@@ -73,11 +73,6 @@ LABEL org.opencontainers.image.title="Diffusion-Pipe" \
       org.opencontainers.image.description="Pytorch 2.9 CUDA 12.8 devel + code-server + diffusion pipe" \
       org.opencontainers.image.source="https://hub.docker.com/r/ls250824/run-diffusion-pipe" \
       org.opencontainers.image.licenses="MIT"
-
-# Test
-# Check
-# Update Hugging Face CLI and verify the hf command is available
-RUN hf update && hf version
 
 RUN python -c "import torch, torchvision, torchaudio, triton; \
 print(f'Torch: {torch.__version__}\\nTorchvision: {torchvision.__version__}\\nTorchaudio: {torchaudio.__version__}\\nTriton: {triton.__version__}\\nCUDA available: {torch.cuda.is_available()}\\nCUDA version: {torch.version.cuda}')"

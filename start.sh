@@ -8,7 +8,6 @@ export NO_COLOR=1
 export HF_HUB_VERBOSITY=warning
 export HF_HUB_DISABLE_TELEMETRY=1
 export DO_NOT_TRACK=1
-export HF_HUB_DISABLE_UPDATE_CHECK=1
 
 # Enable SSH if PUBLIC_KEY is set
 if [[ -n "$PUBLIC_KEY" ]]; then
@@ -187,6 +186,8 @@ download_HF() {
 # Provisioning if running on GPU with CUDA
 if [[ "$HAS_CUDA" -eq 1 ]]; then  
    echo "📥 Provisioning models"
+   
+   hf update && hf version
    
    # Huggingface download file to specified local directory
     for i in $(seq 1 20); do
