@@ -1,5 +1,5 @@
 # Attention / performance libs
-flash-attn==2.8.3
+flash-attn==2.8.4
 sageattention==2.2.0
 
 # Huggingface 

@@ -1,5 +1,24 @@
 # RunPod templates
 
+## MiniMax-H3-Image
+
+```bash
+HF_TOKEN="{{ RUNPOD_SECRET_HF_TOKEN_WRITE }}"
+PASSWORD="{{ RUNPOD_SECRET_CODE-SERVER-NEW }}"
+HF_MODEL1=Comfy-Org/MiniMax-H3-Image
+HF_MODEL_NAME1=diffusion_models/minimax_h3_image_pruned_int8_convrot.safetensors
+HF_MODEL_LOCAL_DIR1=minimax-h3-image
+HF_MODEL2=Comfy-Org/MiniMax-H3
+HF_MODEL_NAME2=vae/minimax_h3_video_vae_fp16.safetensors
+HF_MODEL_LOCAL_DIR2=minimax-h3-image
+HF_MODEL3=ethanfel/Qwen3-VL-32B-Ultra-Heretic-MiniMax-H3-ComfyUI-INT8-ConvRot
+HF_MODEL_NAME3=qwen3vl_32b_h3_ultra_uncensored_heretic_int8_convrot.safetensors
+HF_MODEL_LOCAL_DIR3=minimax-h3-image
+HF_MODEL4=circlestone-labs/MiniMax-H3-Image-Undistill-Lora
+HF_MODEL_NAME4=minimax_h3_image_undistill_lora.safetensors
+HF_MODEL_LOCAL_DIR4=minimax-h3-image/loras
+```
+
 ## WAN 2.1 t2v
 
 ```bash

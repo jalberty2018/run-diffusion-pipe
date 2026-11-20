@@ -27,34 +27,34 @@ See below for options.
 | FLUX-Klein-9B   | RTX 4090 (24 Gb) | 15 Gb |  60 Gb |
 | Krea-2   | RTX 4090 (24 Gb) | 15 Gb |  60 Gb |
 
-## Image setup
+## Image
 
-| Component | Version |
-|-----------|---------|
-| OS        | `Ubuntu 22.04 x86_64` |
-| Python    | `3.11.x` |
-| PyTorch   | `2.9.0` |
-| CUDA      | `12.8.1` |
-| Triton    | `3.4.0` |
-| nvcc      | `12.8.x` |
-| diffusion pipe | cloned from upstream `main` during image build |
-| code server | installed from official install script during image build |
+| Component | Version              |
+|-----------|----------------------|
+| OS        | `Ubuntu 24.04 x86_64` |
+| Python    | `3.12.x`             |
+| PyTorch   | `2.12.1+cu130`             |
+| Torchvision | `0.27.1+cu130`           |
+| Torchaudio | `2.11.0+cu130`            |
+| CUDA      | `13.0`               |
+| cuDNN     | `9`                  |
+| Triton    | `3.7.1`              |
+| CodeServer | `latest`          |
 
-## Installed Attentions
-
-### Wheels
+## Wheels
 
 | Package        | Version  |
 |----------------|----------|
-| flash_attn     | 2.8.3    |
-| sageattention  | 2.2.0    |
+| flash_attn     | `2.8.4`    |
+| sageattention  |  `2.2.0`   |
 
-### Build for
+## Optimised
 
-| Processor | Compute Capability | SM |
-|------------|-----------------|-----------|
-| RTX A5000  | 8.6 | sm_86 |
-| RTX 4090 | 8.9 | sm_89 |
+| Architecture | Compute Capability | Native Build Target | Examples |
+|---|---:|---:|---|
+| Ampere | 8.6 | `sm_86` | RTX A6000, A40 |
+| Ada Lovelace | 8.9 | `sm_89` | RTX 4090, RTX 6000 Ada, L40S |
+| Blackwell | 12.0 | `sm_120` | RTX 5090, RTX PRO 6000, PRO 6000 MiG |
 
 ## Environment Variables
 

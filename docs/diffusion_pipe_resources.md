@@ -13,4 +13,3 @@
 - [Hunyuanvideo](https://civitai.com/articles/9798/training-a-lora-for-hunyuan-video-on-windows)
 - [Wan](https://www.stablediffusiontutorials.com/2025/03/wan-lora-train.html)
 - [Lora training](https://civitai.com/articles/3105/essential-to-advanced-guide-to-training-a-lora)
-

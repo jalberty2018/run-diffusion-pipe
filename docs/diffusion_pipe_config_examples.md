@@ -15,6 +15,7 @@
 - [Z-image Base](config_examples/z_image_base_config.toml)
 - [LTX 2.3](config_examples/LTX23_config.toml) 
 - [Krea 2](config_examples/krea2_config.toml)
+- [MiniMax-H3-Image](config_examples/minimax_h3_image_config.toml)
 - [Flux-Klein-9B control-target](config_examples/Flux_Klein_9B_config.toml) 
 
 ## Example dataset

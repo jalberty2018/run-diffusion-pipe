@@ -14,4 +14,5 @@ Files are downloaded into `/workspace/models/<target_dir>`, where `/workspace` i
 - [WAN 2.2](provisioning/hf_wan_22.md)
 - [Z-image base](provisioning/hf_z_image_base.md)
 - [LTX 2.3](provisioning/hf_LTX23.md)
+- [MiniMax-H3-Image](provisioning/hf_minimax_h3_image.md)
 - [Flux-klein-9B](provisioning/hf_flux_klein_9B_base.md)

@@ -9,7 +9,6 @@
 - [Hardware Requirements](../docs/diffusion_pipe_hardware.md)
 - [Image setup](../docs/diffusion_pipe_image_setup.md)
 - [Environment variables](../docs/diffusion_pipe_configuration.md)
-- [RunPod environment templates](runpod-env-templates.md)
 
 ## Runtime layout
 
@@ -24,17 +23,28 @@ On first pod start these files are moved to `/workspace` so they survive pod res
 
 Symlinks keep `/diffusion-pipe` and `/docs` available for commands and documentation that use the original paths.
 
-## 7z
-
-### Add directory to encrypted archive
+## Huggingface
 
 ```bash
-7z a -p -mhe=on /workspace/output-training.7z /workspace/output/
-7z a -p -mhe=on -v800m /workspace/output-image-x.7z /workspace/output/
-
+export HF_TOKEN="xxxxx"
+hf download model model_name.safetensors --local-dir /workspace/
+hf upload model /workspace/model.safetensors
 ```
 
-### Extract directory from archive
+```bash
+hf auth login --token xxxxx
+```
+
+## 7z Compression  
+
+### **Encrypt & Archive Output**  
+
+```bash
+7z a -p -mhe=on /workspace/output/output-minimax-x.7z /workspace/output/
+7z a -p -mhe=on -v800m /workspace/output/output-image-x.7z /workspace/output/
+```
+
+### **Extract Archive**  
 
 ```bash
 7z x x.7z
@@ -57,16 +67,17 @@ deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /
 | List sessions   | `tmux ls`               |
 | Reconnect   | `tmux attach -t sessie` |
 
-## Bash commands
+## Utilities  
 
 ```bash
-nvtop
-htop
-ncdu
-tmux
-unzip
-nvcc
-nano
-vim
-ncdu
+nvtop      # GPU Monitoring
+nvidia-smi # GPU information
+htop       # Process Monitoring  
+mc         # Midnight Commander (file manager)  
+nano       # Text Editor
+ncdu       # Clean Up
+unzip      # uncompress
+age        # public/private key encryption
+7z         # Archiving
+runpodctl  # runpod pod management
 ```

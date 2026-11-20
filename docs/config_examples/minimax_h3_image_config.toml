@@ -1,0 +1,48 @@
+# MiniMax-H3-Image LoRA training.
+# Model paths match documentation/runpod-env-templates.md.
+# Dataset: image/caption pairs, resolutions = [1024], frame_buckets = [1].
+# Create the dataset config at the path below before starting training.
+output_dir = '/workspace/output'
+dataset = '/workspace/dataset/dataset.toml'
+
+epochs = 1000
+micro_batch_size_per_gpu = 1
+pipeline_stages = 1
+gradient_accumulation_steps = 4
+gradient_clipping = 1
+
+eval_every_n_epochs = 1
+eval_before_first_step = true
+eval_micro_batch_size_per_gpu = 1
+eval_gradient_accumulation_steps = 1
+
+save_every_n_epochs = 1
+checkpoint_every_n_epochs = 1
+activation_checkpointing = true
+partition_method = 'parameters'
+save_dtype = 'bfloat16'
+caching_batch_size = 1
+steps_per_print = 1
+# Adjust block swapping for the available GPU memory.
+# blocks_to_swap = 8
+
+[model]
+type = 'minimax_h3'
+diffusion_model = '/workspace/models/minimax-h3-image/diffusion_models/minimax_h3_image_pruned_int8_convrot.safetensors'
+vae = '/workspace/models/minimax-h3-image/vae/minimax_h3_video_vae_fp16.safetensors'
+text_encoders = [
+    {path = '/workspace/models/minimax-h3-image/qwen3vl_32b_h3_ultra_uncensored_heretic_int8_convrot.safetensors', type = 'minimax'}
+]
+dtype = 'bfloat16'
+timestep_sample_method = 'logit_normal'
+# Merge the undistillation adapter before training the new LoRA.
+merge_adapters = ['/workspace/models/minimax-h3-image/loras/minimax_h3_image_undistill_lora.safetensors']
+
+[adapter]
+type = 'lora'
+rank = 32
+dtype = 'bfloat16'
+
+[optimizer]
+type = 'automagic'
+weight_decay = 0.01
