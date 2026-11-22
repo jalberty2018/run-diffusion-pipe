@@ -2,6 +2,8 @@
 # pytorch 2.12.1
 FROM  ls250824/pytorch-cuda-ubuntu-develop:22092026
 
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+
 # Set working directory
 WORKDIR /
 
