@@ -691,3 +691,7 @@ else
 		echo "⚠️ [SOLUTION 2] Deploy pod on another region then ${RUNPOD_DC_ID:-unknown} ⚠️"
     fi
 fi
+
+# Keep the container running
+echo "ℹ️ End script"
+exec sleep infinity
