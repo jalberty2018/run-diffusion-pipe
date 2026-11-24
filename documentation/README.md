@@ -10,19 +10,6 @@
 - [Image setup](../docs/diffusion_pipe_image_setup.md)
 - [Environment variables](../docs/diffusion_pipe_configuration.md)
 
-## Runtime layout
-
-The image is built with `diffusion-pipe`, this README, and the `docs/` directory under `/`.
-On first pod start these files are moved to `/workspace` so they survive pod restarts:
-
-| Source in image | Persistent path |
-|-----------------|-----------------|
-| `/diffusion-pipe` | `/workspace/diffusion-pipe` |
-| `/README.md` | `/workspace/README.md` |
-| `/docs` | `/workspace/docs` |
-
-Symlinks keep `/diffusion-pipe` and `/docs` available for commands and documentation that use the original paths.
-
 ## Huggingface
 
 ```bash

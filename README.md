@@ -39,6 +39,10 @@ See below for options.
 
 ![Training Krea](images/runpod_Krea2_RTX4090.jpg)
 
+## Training Minimax-H3-Image Lora on RunPod RTX 4090
+
+![Training Minimax](images/runpod_Minimax-H3-Image_RTX4090.jpg)
+
 ## Documentation
 
 - [Resources](docs/diffusion_pipe_resources.md)

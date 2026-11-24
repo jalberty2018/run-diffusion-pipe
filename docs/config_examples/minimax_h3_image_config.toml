@@ -3,9 +3,9 @@
 # Dataset: image/caption pairs, resolutions = [1024], frame_buckets = [1].
 # Create the dataset config at the path below before starting training.
 output_dir = '/workspace/output'
-dataset = '/workspace/dataset/dataset.toml'
+dataset = '/workspace/dataset-p1.toml'
 
-epochs = 1000
+epochs = 15
 micro_batch_size_per_gpu = 1
 pipeline_stages = 1
 gradient_accumulation_steps = 4

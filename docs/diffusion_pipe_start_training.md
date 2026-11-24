@@ -1,34 +1,9 @@
 # Start training
 
-## WAN 2.1
+## Standard
 
 ```bash
 deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/config.toml
-```
-
-## WAN 2.2
-
-```bash
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/config_low.toml
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/config_high.toml
-```
-
-## LTX 2.3
-
-```bash
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/LTX23_config.toml
-```
-
-## ZIB
-
-```bash
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/ZIB_config.toml
-```
-
-## FLUX-Klein 9B
-
-```bash 
-deepspeed --num_gpus=1 /workspace/diffusion-pipe/train.py --deepspeed --config /workspace/FLUX_config.toml
 ```
 
 ## Qwen Image

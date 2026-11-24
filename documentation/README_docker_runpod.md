@@ -6,11 +6,11 @@
 
 - Models are automatically downloaded based on the specified paths in the environment configuration.
 - `/workspace` is persistent on RunPod. On first start the container moves `diffusion-pipe`, `README.md`, and `docs/` into `/workspace`.
-- Code Server starts on port `9000` and TensorBoard starts on port `6006` when CUDA is available.
+- Code Server starts on port `9000` and TensorBoard starts on port `6006` when CUDA 13.x is available.
 - Authentication credentials can be set via secrets for:
   - **Code server** authentication (not possible to switch off)
   - **Hugging Face** token for model access.
-  - **SSH/SCP** access when `PUBLIC_KEY` is set.
+  - **SSH/SCP** access when `PUBLIC_KEY` is set or configured on runpod.
 
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
@@ -19,13 +19,14 @@ See below for options.
 
 - Volume: Models + dataset (3000 images/frames) + output (10 epochs)
 
-| Model | GPU | Container Disk | Volume Disk |
-|--------------|------------|------------|------------------|
-| WAN 2.2     | RTX A5000 (24 Gb) | 15 Gb |   80 Gb   |
-| LTX 2.3   | L40S (48 Gb) | 15 Gb | 100 Gb  |
-| ZIB   | RTX 4090 (24 Gb) | 15 Gb | 40 Gb |
-| FLUX-Klein-9B   | RTX 4090 (24 Gb) | 15 Gb |  60 Gb |
-| Krea-2   | RTX 4090 (24 Gb) | 15 Gb |  60 Gb |
+| Model | GPU | Container Disk | Volume Disk | Block swap |
+|--------------|------------|------------|------------------|------|
+| WAN 2.2     | RTX A5000 (24 Gb) | 15 Gb |   80 Gb   | 0 |
+| LTX 2.3   | L40S (48 Gb) | 15 Gb | 100 Gb  | 0 |
+| ZIB   | RTX 4090 (24 Gb) | 15 Gb | 40 Gb | 0 |
+| FLUX-Klein-9B   | RTX 4090 (24 Gb) | 15 Gb |  60 Gb | 0 |
+| Krea-2   | RTX 4090 (24 Gb) | 15 Gb |  60 Gb | 0 |
+| Minimax-H3-Image | RTX 4090 (24 Gb) | 15 Gb |  70 Gb | 15-20 |
 
 ## Image
 
@@ -56,15 +57,12 @@ See below for options.
 | Ada Lovelace | 8.9 | `sm_89` | RTX 4090, RTX 6000 Ada, L40S |
 | Blackwell | 12.0 | `sm_120` | RTX 5090, RTX PRO 6000, PRO 6000 MiG |
 
-## Environment Variables
+## Configuration (optional)
 
-### **Authentication Tokens**
-
-| Token        | Environment Variable |
-|--------------|----------------------|
-| Huggingface  | `HF_TOKEN`           |
-| Code Server  | `PASSWORD`           |
-| SSH/SCP      | `PUBLIC_KEY`         |
+| Variable | Purpose |
+|---|---|
+| `PASSWORD` | Protect Code Server and pod tools (automatic if not set) |
+| `HF_TOKEN` | Gated/private Hugging Face downloads |
 
 ## Huggingface model configuration
 
